@@ -18,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/matnreyes/Mastermind/issues"
   },
-  "homepage": "https://github.com/matnreyes/Mastermind#readme"
+  "homepage": "https://github.com/matnreyes/Mastermind#readme",
+  "devDependencies": {
+    "eslint": "^8.30.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
 }

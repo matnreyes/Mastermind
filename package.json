@@ -1,0 +1,22 @@
+{
+  "name": "mastermind",
+  "version": "1.0.0",
+  "description": "A musical version of the game Mastermind, created for LinkedIn REACH apprenticeship program.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matnreyes/Mastermind.git"
+  },
+  "keywords": [
+    "mastermind"
+  ],
+  "author": "Matias Reyes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matnreyes/Mastermind/issues"
+  },
+  "homepage": "https://github.com/matnreyes/Mastermind#readme"
+}

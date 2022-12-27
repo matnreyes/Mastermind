@@ -14,7 +14,7 @@ const promptSchema = {
 }
 
 const masterMind = async (tries) => {
-  if (tries === 1) {
+  if (tries === 10) {
     console.log('=====  GAME OVER  =====')
     return
   }

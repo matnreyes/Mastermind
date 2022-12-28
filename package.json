@@ -1,6 +1,6 @@
 {
   "name": "mastermind",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A musical version of the game Mastermind, created for LinkedIn REACH apprenticeship program.",
   "main": "index.js",
   "scripts": {

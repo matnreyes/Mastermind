@@ -19,14 +19,25 @@ guessRouter.post('/', async (req, res) => {
     digit: 0,
     location: 0
   }
+  const guessHash = new Map()
   guess.forEach((number, index) => {
     const isInCode = codeRecurrence.get(number)
-    if (isInCode) {
+    if (isInCode && isInCode.includes(index)) {
+      results.location += 1
       results.digit += 1
-      if (isInCode.includes(index)) {
-        results.location += 1
+    } else if (isInCode) {
+      results.digit += 1
+      const inGuessHash = guessHash.get(number)
+      if (inGuessHash) {
+        guessHash.set(number, inGuessHash + 1)
+      } else {
+        guessHash.set(number, 1)
       }
     }
+  })
+
+  guessHash.forEach(number => {
+    results.digit -= number
   })
 
   res.json(results)

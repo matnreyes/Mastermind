@@ -29,7 +29,10 @@ const fetchNumbers = async () => {
 const masterMind = async (tries, secretCode) => {
   // Losing case
   if (tries > 10) {
-    console.log('========  GAME OVER  ========')
+    console.log('==========================')
+    console.log('        YOU LOST!!!       ')
+    console.log('==========================')
+    console.log(`ANSWER: ${secretCode}`)
     return
   }
 

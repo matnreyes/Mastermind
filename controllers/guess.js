@@ -3,7 +3,7 @@ const guessRouter = require('express').Router()
 guessRouter.post('/', async (req, res) => {
   const turn = req.body
 
-  res.json(turn).status(201)
+  res.status(201).json(turn)
 })
 
 module.exports = guessRouter

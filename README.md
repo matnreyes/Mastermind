@@ -20,7 +20,7 @@ Our last archeological dig found ancient tunes lost through the ages. Sadly, tim
 ```
 
 ### Bug list
-- [ ] duplicate numbers give incorrect hints.
+- [x] duplicate numbers give incorrect hints.
 Example:
 secretCode = [3, 4, 3, 6]
 guess = [3, 3, 3, 3]
@@ -28,3 +28,4 @@ guess = [3, 3, 3, 3]
 Backend response = 4 correct int, 2 correct location
 
 Date logged: 12/28/22
+Date fixed: 12/28/22

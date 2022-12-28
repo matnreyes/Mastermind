@@ -16,5 +16,5 @@ Our last archeological dig found ancient tunes lost through the ages. Sadly, tim
 ```
 - Run start command:
 ``` bash
-  npm run start
+  npm run mastermind
 ```

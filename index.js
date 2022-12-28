@@ -3,6 +3,7 @@ const prompt = require('prompt')
 
 const baseUrl = 'https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain'
 
+// Validation for user prompt, saves a lot of space checking if user input is correct
 const promptSchema = {
   properties: {
     userGuess: {
@@ -13,6 +14,7 @@ const promptSchema = {
   }
 }
 
+// Separte function since game is recursive, can be used as middleware later
 const fetchNumbers = async () => {
   // Fetch random numbers from API
   const randomNumbers = await axios.get(baseUrl)

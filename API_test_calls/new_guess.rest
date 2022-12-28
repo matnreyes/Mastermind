@@ -3,5 +3,5 @@ Content-Type: application/json
 
 {
   "secretCode": [3, 4, 3, 6],
-  "guess": [3, 3, 3, 3]
+  "guess": [5, 3, 3, 1]
 }

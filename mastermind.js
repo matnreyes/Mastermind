@@ -14,6 +14,20 @@ const promptSchema = {
   }
 }
 
+// Maps index of secretCode
+const mapCode = async (code) => {
+  const indexMap = new Map()
+  code.forEach((number, index) => {
+    const indexes = indexMap.get(number)
+    if (indexes) {
+      indexMap.set(number, indexes.concat(index))
+    } else {
+      indexMap.set(number, [index])
+    }
+  })
+  return indexMap
+}
+
 // Separte function since game is recursive, can be used as middleware later
 const fetchNumbers = async () => {
   // Fetch random numbers from API
@@ -26,7 +40,7 @@ const fetchNumbers = async () => {
   return code
 }
 
-const masterMind = async (tries, secretCode) => {
+const masterMind = async (tries, secretCode, codeMap) => {
   // Losing case
   if (tries > 10) {
     console.log('==========================')
@@ -43,24 +57,43 @@ const masterMind = async (tries, secretCode) => {
   // Parse user response to int
   const guess = userGuess.split(', ')
 
-  // Logic for checking correctness
-  let correctNumber = 0
-  let correctLocation = 0
+  // Logic for checking correctness while mapping guesses
+  const results = {
+    digits: 0,
+    location: 0
+  }
+  const guessMap = new Map()
   guess.forEach((number, index) => {
-    if (secretCode.includes(number)) {
-      correctNumber += 1
+    const isInCode = codeMap.get(number)
+    if (isInCode) {
+      results.digits += 1
+      if (isInCode.includes(index)) {
+        results.location += 1
+      }
 
-      if (number === secretCode[index]) {
-        correctLocation += 1
+      // Map correct guesses
+      const inGuessMap = guessMap.get(number)
+      if (inGuessMap) {
+        guessMap.set(number, inGuessMap + 1)
+      } else {
+        guessMap.set(number, 1)
       }
     }
   })
 
+  // Checks that there aren't more correct guesses than indexes of secretCode
+  guessMap.forEach((number, index) => {
+    const mappedCode = codeMap.get(index)
+    if (number > mappedCode.length) {
+      results.digits -= (number - mappedCode.length)
+    }
+  })
+
   // Give hint to user
-  console.log(`${correctNumber} correct numbers and ${correctLocation} correct locations`)
+  console.log(`${results.digits} correct numbers and ${results.location} correct locations`)
 
   // Winning case
-  if (correctLocation === 4) {
+  if (results.location === 4) {
     console.log('==========================')
     console.log('         YOU WON!!!       ')
     console.log('==========================')
@@ -68,14 +101,15 @@ const masterMind = async (tries, secretCode) => {
   }
 
   // Check if guess is correct
-  masterMind(tries + 1, secretCode)
+  masterMind(tries + 1, secretCode, codeMap)
 }
 
 // Main game function
 const main = async () => {
   const secretCode = await fetchNumbers()
+  const codeMap = await mapCode(secretCode)
   const tries = 1
-  masterMind(tries, secretCode)
+  masterMind(tries, secretCode, codeMap)
 }
 
 main()

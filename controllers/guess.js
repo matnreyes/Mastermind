@@ -10,9 +10,9 @@ guessRouter.post('/', async (req, res) => {
   // Loads index of digits into hashMap
   const codeRecurrence = new Map()
   secretCode.forEach((number, index) => {
-    const recurrence = codeRecurrence.get(number)
-    if (recurrence) {
-      codeRecurrence.set(number, recurrence.concat(index))
+    const indexes = codeRecurrence.get(number)
+    if (indexes) {
+      codeRecurrence.set(number, indexes.concat(index))
     } else {
       codeRecurrence.set(number, [index])
     }
@@ -29,7 +29,7 @@ guessRouter.post('/', async (req, res) => {
         results.location += 1
       }
 
-      // Hash correct guesses
+      // Map correct guesses
       const inGuessHash = guessHash.get(number)
       if (inGuessHash) {
         guessHash.set(number, inGuessHash + 1)

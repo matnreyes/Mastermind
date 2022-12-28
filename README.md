@@ -19,6 +19,16 @@ Our last archeological dig found ancient tunes lost through the ages. Sadly, tim
   npm run mastermind
 ```
 
+Run through:
+I decided that using functional principles was the best way to finish this simple game.
+Program consists of 4 functions.
+*Functions:*
+- main: runs all the processes required for running game, think of it as the session
+- fetchNumbers: uses Axios library to fetch random integers from random.API while parsing them into usable array
+- mapCode: creates a hashMap of code of our secretCode to keep track of indexes
+- masterMind: recursive function that increases tries and passes codeMap until either 10 tries have been made or game is won
+  - user input and verification is done through prompt library with regex
+
 ### Bug list
 - [x] duplicate numbers give incorrect hints.
 Example:

@@ -1,5 +1,5 @@
-# Musical Mastermind
-Our last archeological dig found ancient tunes lost through the ages. Sadly, time hasn't been kind to these ancient tunes. With from our team of experts, and your musical genius, we can figure out what the missing pieces of the tune are!
+# Mastermind of the Third Kind
+Aliens from the fourth dimension have landed on Earth. With your musical genius, and our state of the art deciphering software, help us decipher their language to save our planet from total destruction. 
 
 
 # CLI Mastermind

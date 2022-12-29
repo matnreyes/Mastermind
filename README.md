@@ -38,6 +38,7 @@ Program consists of 4 functions.
 I decided to use musical notes instead of pegs to highlight my time as a musician. The concept of Close Encounters of the Third Kind makes this fun and highlights my geek side. The goal is to play the sound of the notes once player hits submit on guess. 
 
 ### Bug list:
+<div>
 - [x] duplicate numbers give incorrect hints.
 Example:
 secretCode = [3, 4, 3, 6]
@@ -47,3 +48,4 @@ Backend response = 4 correct int, 2 correct location
 
 Date logged: 12/28/22
 Date fixed: 12/28/22
+</div>

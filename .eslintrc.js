@@ -12,6 +12,9 @@ module.exports = {
   },
   rules: {
     semi: ['error', 'never'],
-    'comma-dangle': ['error', 'never']
+    'comma-dangle': ['error', 'never'],
+    'no-param-reassign': [2, {
+      'props': false
+    }]
   }
 }

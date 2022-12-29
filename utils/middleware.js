@@ -1,19 +1,21 @@
+const logger = require('./logger')
+
 const requestLogger = (req, res, next) => {
-  console.log('METHOD: ', req.method)
-  console.log('PATH: ', req.path)
-  console.log('BODY', req.body)
-  console.log('------')
+  logger.info('METHOD: ', req.method)
+  logger.info('PATH: ', req.path)
+  logger.info('BODY: ', req.body)
+  logger.info('--------')
   next()
 }
 
 const errorHandler = (error, req, res, next) => {
-  console.error(error.message)
+  logger.error(error)
 
-  if (error.name === 'InvalidDifficulty ') {
-    res.status(400).send({ error: 'Difficulty should be between 4 and 6'})
+  if (error.name === 'InvalidDifficulty') {
+    return res.status(400).send({ error: error.message })
   }
   if (error.name === 'ValidationError') {
-    res.status(400).send({ error: error.message})
+    return res.status(400).send({ error: error.message })
   }
 
   next(error)

@@ -34,7 +34,7 @@ Program consists of 4 functions.
 - Mobile:<br>
 ![mobile](https://i.ibb.co/3zvVssk/i-Phone-14-Pro-Max-1.png)
 
-Idea:
+- Idea:
 I decided to use musical notes instead of pegs to highlight my time as a musician. The concept of Close Encounters of the Third Kind makes this fun and highlights my geek side. The goal is to play the sound of the notes once player hits submit on guess. 
 
 ### Bug list:

@@ -13,4 +13,6 @@ app.use(middleware.requestLogger)
 app.use('/api/guess', guessRouter)
 app.use('/api/code', codeRouter)
 
+app.use(middleware.errorHandler)
+
 module.exports = app

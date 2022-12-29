@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const guessRouter = require('./controllers/guess')
+const codeRouter = require('./controllers/code')
 const middleware = require('./utils/middleware')
 
 const app = express()
@@ -10,5 +11,6 @@ app.use(express.json())
 app.use(middleware.requestLogger)
 
 app.use('/api/guess', guessRouter)
+app.use('/api/code', codeRouter)
 
 module.exports = app

@@ -30,8 +30,8 @@ Program consists of 4 functions.
   - user input and verification is done through prompt library with regex
 
 ### Design:
-Mock of game made in Figma: <br>
-Mobile:<br>
+**Mockup of game design**<br>
+- Mobile:<br>
 ![mobile](https://i.ibb.co/3zvVssk/i-Phone-14-Pro-Max-1.png)
 
 Idea:

@@ -4,8 +4,8 @@ const Guess = () => {
   const [guess, setGuess] = useState()
   return (
     <div>
-      <div>
-        <button></button> <button></button> <button></button> <button></button>
+      <div className="bg-blend-saturation">
+        <button className='bg-black'></button> <button></button> <button></button> <button></button>
       </div>
     </div>
   )

@@ -1,6 +1,12 @@
+import Game from './components/Game'
+import Login from './components/Login'
+
 const App = () => {
   return (
-    <h1>Hello world</h1>
+    <div>
+      <Login />
+      <Game />
+    </div>
   )
 }
 

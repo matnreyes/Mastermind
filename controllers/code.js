@@ -1,7 +1,7 @@
 const codeRouter = require('express').Router()
 const axios = require('axios')
 
-codeRouter.get('/:difficulty', async (req, res, next) => {
+codeRouter.get('/:difficulty', async (req, res) => {
   const { difficulty } = req.params
 
   // Validate difficulty range

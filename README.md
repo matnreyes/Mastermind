@@ -16,7 +16,7 @@ I decided to use musical notes instead of pegs to highlight my time as a musicia
 
 # CLI Mastermind
 ### Instructions: 
-- Make sure Node is running on your device: 
+- Make sure Node is running on your device (you will need at least v.16): 
   - https://nodejs.org/
 - Run the git clone command on your Terminal:
 ``` bash

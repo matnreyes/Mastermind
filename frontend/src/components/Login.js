@@ -10,6 +10,7 @@ const Login = () => {
         <input type='password'></input>
       </div>
       <button>Login</button> 
+      <button>Create user</button>
     </form>
   )
 }

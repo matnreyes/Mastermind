@@ -4,16 +4,14 @@ const Game = () => {
   return (
     <div className="bg-slate-300 flex">
       <h2>Guess the code to save humanity</h2>
-      <Guess />
-      <Guess />
-      <Guess />
-      <Guess />
-      <Guess />
-      <Guess />
-      <Guess />
-      <Guess />
-      <Guess />
-      <Guess />
+      <ul className=''>
+        <li className='p-10'>
+          <Guess />
+        </li>
+        <li className='p-10'>
+          <Guess />
+        </li>
+      </ul>
     </div>
   )
 }

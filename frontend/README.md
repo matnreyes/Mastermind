@@ -5,7 +5,9 @@ Run this command in your terminal:
 npm run start
 ```
 Visit:
+``` bash
 localhost:3000
+```
 
 ## Design Compromises:
 12/31/22:

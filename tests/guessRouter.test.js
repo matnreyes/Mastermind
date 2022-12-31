@@ -5,6 +5,18 @@ const api = supertest(app)
 
 describe('Guess is checked', () => {
   const secretCode = [1, 2, 3, 4]
+
+  test('and fails if guess is larger than code') {
+    const guess = [1, 2, 3, 4, 5, 6]
+    const guessResponse = await api
+      .post('/api/guess')
+      .send({ secretCode, guess })
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    const results = guessResponse.body
+    expect(results.error).toContain('Guess is too long')
+  }
   test('and has all the same number', async () => {
     const guess = [1, 1, 1, 1]
 

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import codeService from '../services/code'
 import Turn from './Turn'
 import DifficultyForm from './Difficulty'
+import SendButton from './SendButton'
 
 const Game = () => {
   const [difficulty, setDifficulty] = useState(4)
@@ -20,12 +21,12 @@ const Game = () => {
   }
   
   return (
-    <div className="bg-slate-300 flex">
-      <h2>Guess the code to save humanity</h2>
+    <div className="bg-slate-800 flex">
       {code === null 
         ? <DifficultyForm setGameDifficulty={setGameDifficulty}/>
         : 
-        <div className="flex-direction:column">
+        <div className="flex-direction:column p-2">
+          <h1 className="text-center">Guess the code to save humanity</h1>
           <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
           <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
           <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
@@ -35,7 +36,7 @@ const Game = () => {
           <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
           <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
           <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
-
+          <SendButton guess={guess} code={code}/>
         </div>
       }
     </div>

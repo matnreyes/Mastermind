@@ -7,9 +7,9 @@ const Turn = ({ difficulty, setUserGuess}) => {
 
   return (
     <div className="flex border bg-amber-50 rounded-lg">
-      {guessesArray.map((n, index) => 
-        <div key={index}>
-          <Guess setUserGuess={setUserGuess} />
+      {guessesArray.map((n, beatIndex) => 
+        <div key={beatIndex}>
+          <Guess setUserGuess={setUserGuess} beatIndex={beatIndex}/>
           <div className="border"/>
         </div>  
       )}

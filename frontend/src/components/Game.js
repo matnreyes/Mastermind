@@ -8,6 +8,7 @@ const Game = () => {
   const [difficulty, setDifficulty] = useState(4)
   const [code, setCode] = useState(null)
   const [guess, setGuess] = useState([])
+  const [guesses, setGuesses] = useState([])
 
   const setGameDifficulty = async (event) => {
     const gameDifficulty = await codeService.fetchCode(event.target.value)
@@ -15,9 +16,12 @@ const Game = () => {
     setCode(gameDifficulty)
   }
 
-  const setUserGuess = async (event) => {
-    setGuess(guess.concat(event.target.value))
-    console.log(guess.concat(event.target.value))
+  const setUserGuess = async (event, beatIndex) => {
+    console.log(beatIndex)
+    const guessArray = guess
+    guessArray[beatIndex] = event.target.value
+    setGuess(guessArray)
+    console.log(guessArray)
   }
   
   return (
@@ -28,15 +32,7 @@ const Game = () => {
         <div className="flex-direction:column p-2 h-full flex-shrink">
           <h1 className="text-center text-amber-50 text-xl font-mono">Guess the code to save humanity</h1>
           <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
-          <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
-          <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
-          <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
-          <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
-          <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
-          <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
-          <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
-          <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
-          <SendButton guess={guess} code={code}/>
+          <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses}/>
         </div>
       }
     </div>

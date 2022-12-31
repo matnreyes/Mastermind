@@ -25,8 +25,8 @@ const Game = () => {
       {code === null 
         ? <DifficultyForm setGameDifficulty={setGameDifficulty}/>
         : 
-        <div className="flex-direction:column p-2">
-          <h1 className="text-center">Guess the code to save humanity</h1>
+        <div className="flex-direction:column p-2 h-full flex-shrink">
+          <h1 className="text-center text-amber-50 text-xl font-mono">Guess the code to save humanity</h1>
           <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
           <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
           <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>

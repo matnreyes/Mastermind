@@ -6,9 +6,12 @@ const Turn = ({ difficulty, setUserGuess}) => {
   guessesArray.fill(0)
 
   return (
-    <div className="flex divide-y-2">
+    <div className="flex border bg-amber-50 rounded-lg">
       {guessesArray.map((n, index) => 
-        <Guess setUserGuess={setUserGuess} key={index} />
+        <div key={index}>
+          <Guess setUserGuess={setUserGuess} />
+          <div className="border"/>
+        </div>  
       )}
     </div>
   )

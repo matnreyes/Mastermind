@@ -11,7 +11,7 @@ describe('Guess is checked', () => {
     const guessResponse = await api
       .post('/api/guess')
       .send({ secretCode, guess })
-      .expect(200)
+      .expect(400)
       .expect('Content-Type', /application\/json/)
 
     const results = guessResponse.body

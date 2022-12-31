@@ -7,6 +7,12 @@ guessRouter.post('/', async (req, res) => {
     location: 0
   }
 
+  if (guess.length !== secretCode.length) {
+    const error = new Error('Guess is too long')
+    error.name = 'InvalidGuessLength'
+    throw (error)
+  }
+
   // Loads index of digits into hashMap
   const codeRecurrence = new Map()
   secretCode.forEach((number, index) => {

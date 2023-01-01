@@ -21,6 +21,9 @@ const errorHandler = (error, req, res, next) => {
   if (error.name === 'InvalidGuessLength') {
     return res.status(400).json({ error: error.message })
   }
+  if (error.name === 'GameOver') {
+    return res.status(403).json({ error: error.message })
+  }
 
   next(error)
 }

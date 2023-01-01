@@ -1,10 +1,16 @@
 const guessRouter = require('express').Router()
 
 guessRouter.post('/', async (req, res) => {
-  const { secretCode, guess } = req.body
+  const { secretCode, guess, tries } = req.body
   const results = {
     digit: 0,
     location: 0
+  }
+
+  if (tries > 9) {
+    const error = new Error('Out of guesses')
+    error.name = 'GameOver'
+    throw (error)
   }
 
   if (guess.length !== secretCode.length) {

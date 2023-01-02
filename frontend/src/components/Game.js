@@ -25,7 +25,6 @@ const Game = () => {
     if (!(guessArray.includes(undefined)) && guessArray.length === difficulty) {
       setSendButtonActive(true)
     }
-    console.log(guessArray)
     setGuess(guessArray)
   }
 
@@ -35,13 +34,15 @@ const Game = () => {
       {code === null 
         ? <DifficultyForm setGameDifficulty={setGameDifficulty}/>
         : 
-        <div className="flex-direction:column p-2 h-full flex-shrink">
-          <h1 className="text-center text-amber-50 text-xl font-mono">Guess the code to save humanity</h1>
-          <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
-          {sendButtonActive &&
-            <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses} setGuess={setGuess} results={results} setResult={setResult} setSendButtonActive={setSendButtonActive}/>
-          }
-          <GuessHistory guesses={guesses}/>
+        <div className="flex">
+          <div className="flex-direction:column p-2 h-full flex-shrink">
+            <h1 className="text-center text-amber-50 text-xl font-mono">Guess the code to save humanity</h1>
+            <Turn setUserGuess={setUserGuess} difficulty={difficulty}/>
+            {sendButtonActive &&
+              <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses} setGuess={setGuess} results={results} setResult={setResult} setSendButtonActive={setSendButtonActive}/>
+            }
+          </div>
+          <GuessHistory guesses={guesses} results={results}/>
         </div>
       }
     </div>

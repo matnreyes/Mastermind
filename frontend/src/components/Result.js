@@ -8,12 +8,12 @@ const Result = ({ result }) => {
 
 
   return (
-    <div className="flex flex-column text-amber-50">
+    <div className="flex flex-column text-amber-50 bg-slate-500">
       <div>
-        {locationArray.map((circle, index) => <HiCheckrCircle className="bg-amber-50" key={index}/>)}
+        {locationArray.map((circle, index) => <HiCheckCircle color="red" key={index}/>)}
       </div>
       <div>
-        {result.digit}
+        {digitArray.map((circle, index) => <HiCheckCircle color="grey" key={index}/>)}
       </div>
     </div>
 

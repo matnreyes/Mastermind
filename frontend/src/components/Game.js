@@ -19,7 +19,7 @@ const Game = () => {
     setCode(gameDifficulty)
   }
 
-  const setUserGuess = async (event, beatIndex) => {
+  const setUserGuess = async (event, beatIndex, setIsActive) => {
     const guessArray = guess
     guessArray[beatIndex] = event.target.value
     if (!(guessArray.includes(undefined)) && guessArray.length === difficulty) {

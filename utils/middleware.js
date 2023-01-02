@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable consistent-return */
 const logger = require('./logger')
 
@@ -23,6 +24,16 @@ const errorHandler = (error, req, res, next) => {
   }
   if (error.name === 'GameOver') {
     return res.status(403).json({ error: error.message })
+  }
+  if (error.name === 'APIUnreacheable') {
+    // Generate random numbers offline
+    logger.info('API cannot be reached, generating code')
+    const { difficulty } = error
+    const code = []
+    for (let i = 0; i < difficulty; i++) {
+      code.push(Math.floor(Math.random() * 8))
+    }
+    res.json(code)
   }
 
   next(error)

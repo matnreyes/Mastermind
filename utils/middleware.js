@@ -31,7 +31,7 @@ const errorHandler = (error, req, res, next) => {
     const { difficulty } = error
     const code = []
     for (let i = 0; i < difficulty; i++) {
-      code.push(Math.floor(Math.random() * 8))
+      code.push((Math.floor(Math.random() * 8)).toString())
     }
     res.json(code)
   }

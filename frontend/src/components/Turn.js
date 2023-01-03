@@ -1,6 +1,6 @@
 import Guess from './Guess'
 
-const Turn = ({ difficulty, setUserGuess}) => {
+const Turn = ({ difficulty, setUserGuess }) => {
   // Used to dynamically create buttons based on user difficulty preference
   const guessesArray = new Array(difficulty)
   guessesArray.fill(0)

@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 require('express-async-errors')
 const guessRouter = require('./controllers/guess')
+const loginRouter = require('./controllers/login')
+const userRouter = require('./controllers/users')
 const codeRouter = require('./controllers/code')
 const middleware = require('./utils/middleware')
 
@@ -13,6 +15,8 @@ app.use(cors())
 app.use(express.json())
 app.use(middleware.requestLogger)
 
+app.use('/api/login', loginRouter)
+app.use('/api/users', userRouter)
 app.use('/api/guess', guessRouter)
 app.use('/api/code', codeRouter)
 

@@ -6,7 +6,7 @@ usersRouter.post('/', async (req, res) => {
   const { username, password } = req.body
 
   // Encrypt password
-  const passwordHash = bcrypt.hash(password, 10)
+  const passwordHash = await bcrypt.hash(password, 10)
   const user = new User({
     username,
     passwordHash,

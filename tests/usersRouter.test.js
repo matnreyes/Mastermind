@@ -2,6 +2,12 @@ const supertest = require('supertest')
 const app = require('../app')
 
 const api = supertest(app)
+const User = require('../models/user')
+
+// Reset test database before each run
+beforeEach(async () => {
+  await User.deleteMany({})
+})
 
 describe('new user', () => {
   test('can be added with right parameter', async () => {

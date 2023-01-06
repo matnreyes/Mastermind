@@ -1,5 +1,5 @@
 # Mastermind of the Third Kind
-**[Fly.io Deployment](https://matnreyes-mastermind.fly.dev/)**
+**[Fly.io Deployment](https://matnreyes-mastermind.fly.dev/)**<br>
 Aliens from the fourth dimension have landed on Earth. With your musical genius, and our state of the art deciphering software, help us decipher their language to save our planet from total destruction. 
 
 ### Design:
@@ -14,6 +14,8 @@ I decided to use musical notes instead of pegs to highlight my time as a musicia
 **Logged in user winning game:**
 ![websequencediagram](https://i.ibb.co/ZHDc6nj/67-C3-BA07-61-E6-49-E3-B20-C-CADC13-A9454-B.jpg)
 
+### Notes
+- The .env file is exposed for the sake of sharing project, otherwise, it would be gitignored
 
 # CLI Mastermind
 ### Instructions: 

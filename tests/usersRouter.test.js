@@ -1,5 +1,4 @@
 const supertest = require('supertest')
-const bcrypt = require('bcrypt')
 const app = require('../app')
 
 const api = supertest(app)

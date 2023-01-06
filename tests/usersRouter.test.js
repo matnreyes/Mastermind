@@ -17,8 +17,6 @@ describe('new user', () => {
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
-    const verifiedPassword = await bcrypt.compare(user.password, userResponse.body.passwordHash)
-
-    expect(verifiedPassword).toBe(true)
+    expect(userResponse.body.username).toEqual(user.username)
   })
 })

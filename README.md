@@ -3,19 +3,21 @@
 Aliens from the fourth dimension have landed on Earth. With your musical genius, and our state of the art deciphering software, help us decipher their language to save our planet from total destruction. 
 
 ### Instructions: 
-1. Open terminal and clone this repository:
+1. Make sure Node is installed on your system. Follow these instructions:
+- https://nodejs.org/
+2. Open terminal and clone this repository:
 ``` bash
 git clone https://github.com/matnreyes/Mastermind.git
 ```
-2. Install project dependencies by running this command:
+3. Install project dependencies by running this command:
 ``` bash
 npm install
 ```
-3. Start Node server:
+4. Start Node server:
 ``` bash
 npm run start
 ```
-4. Open your favorite browser and visit 
+5. Open your favorite browser and visit 
 - http://localhost:8080
 
 

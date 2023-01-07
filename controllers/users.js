@@ -1,5 +1,6 @@
-const usersRouter = require('express').Router()
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 usersRouter.post('/', async (req, res) => {
@@ -16,6 +17,22 @@ usersRouter.post('/', async (req, res) => {
   const savedUser = await user.save()
 
   res.status(201).json(savedUser)
+})
+
+// Route for updating user wins after a user wins
+usersRouter.put('/:username', async (req, res) => {
+  const { token } = req.body
+  if (!jwt.verify(token, process.env.SECRET)) {
+    const error = new Error('JWT token invalid')
+    error.name('InvalidToken')
+    throw error
+  }
+
+  const user = await User.findOne({ username: req.params.username })
+  user.wins += 1
+  await user.save()
+
+  res.status(202).end()
 })
 
 module.exports = usersRouter

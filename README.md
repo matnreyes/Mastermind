@@ -33,6 +33,17 @@ I decided to use musical notes instead of pegs to highlight my time as a musicia
 **Logged in user winning game:**
 ![websequencediagram](https://i.ibb.co/ZHDc6nj/67-C3-BA07-61-E6-49-E3-B20-C-CADC13-A9454-B.jpg)
 
+### Feature goals:
+[x] Users creation and loggin connected to DB
+[x] Leaderboard
+[x] Multiple difficulties
+[x] Server-side code generation if API fails
+[ ] Sound when sending guess
+[ ] Number of remaining guesses
+[ ] Hints
+[ ] Timer
+[ ] Multiplayer
+
 ### Notes
 - The .env file is exposed for the sake of sharing project, otherwise, it would be gitignored
 

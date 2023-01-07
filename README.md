@@ -55,6 +55,6 @@ Backend response = 4 correct int, 2 correct location
 Date logged: 12/28/22
 Date fixed: 12/28/22
 
-- [] guess buttons won't reset to default state after guess is sent off
+- [ ] guess buttons won't reset to default state after guess is sent off
 
 Date logged: 1/6/23

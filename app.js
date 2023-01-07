@@ -23,7 +23,9 @@ mongoose.connect(MONGODB_URI)
     logger.error(error)
   })
 
-app.use(express.static('build'))
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'))
+}
 
 app.use(cors())
 app.use(express.json())

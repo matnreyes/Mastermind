@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const updateWins = async (username, token) => {
-  console.log(token)
   const winResponse = await axios.put(`/api/users/${username}`, { token })
   return winResponse
 }

@@ -5,9 +5,7 @@ const Result = ({ result }) => {
   locationArray.fill(0)
   const digitArray = new Array(result.digit)
   digitArray.fill(0)
-
   
-  console.log(result)
   return (
     <div className="flex flex-column text-amber-50 bg-slate-500">
       <div>

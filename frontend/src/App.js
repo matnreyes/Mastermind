@@ -15,7 +15,7 @@ const App = () => {
   }, [])
 
   return (
-    <div className="bg-slate-800">
+    <div className="flex h-screen bg-slate-800 ">
       {user === null 
       ? <Login setUser={setUser}/>
       : <Game className="flex justify-center"/>}

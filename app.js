@@ -9,6 +9,7 @@ const usersRouter = require('./controllers/users')
 const codeRouter = require('./controllers/code')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
+const leaderboardRouter = require('./controllers/leaderboard')
 
 const app = express()
 
@@ -35,6 +36,7 @@ app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/guess', guessRouter)
 app.use('/api/code', codeRouter)
+app.use('/api/leaderboard', leaderboardRouter)
 
 app.use(middleware.errorHandler)
 

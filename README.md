@@ -45,7 +45,6 @@ Program consists of 4 functions.
   - user input and verification is done through prompt library with regex
 
 ### Bug list:
-<div>
 - [x] duplicate numbers give incorrect hints.
 Example:
 secretCode = [3, 4, 3, 6]
@@ -55,4 +54,7 @@ Backend response = 4 correct int, 2 correct location
 
 Date logged: 12/28/22
 Date fixed: 12/28/22
-</div>
+
+- [] guess buttons won't reset to default state after guess is sent off
+
+Date logged: 1/6/23

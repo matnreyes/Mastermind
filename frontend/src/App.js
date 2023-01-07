@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div className="bg-slate-800">
       {user === null 
-      ? <Login />
+      ? <Login setUser={setUser}/>
       : <Game className="flex justify-center"/>}
     </div>
   )

@@ -6,8 +6,9 @@ import SendButton from './SendButton'
 import GuessHistory from './GuessHistory'
 import WinScreen from './WinScreen'
 import LoseScreen from './LoseScreen'
+import userService from '../services/user'
 
-const Game = () => {
+const Game = ({user}) => {
   const [difficulty, setDifficulty] = useState(4)
   const [code, setCode] = useState(null)
   const [guess, setGuess] = useState([])
@@ -21,7 +22,13 @@ const Game = () => {
     setGuesses([])
     setResult([])
 
-  }, [code]) 
+  }, [code])
+
+  useEffect(() => {
+    if (gameStatus === 'won') {
+      userService.updateWins(user.username, user.token)
+    }
+  }, [gameStatus])
 
   const setGameDifficulty = async (event) => {
     const gameDifficulty = await codeService.fetchCode(event.target.value)

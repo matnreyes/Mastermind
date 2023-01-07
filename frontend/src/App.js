@@ -18,7 +18,7 @@ const App = () => {
     <div className="flex h-screen bg-slate-800 ">
       {user === null 
       ? <Login setUser={setUser}/>
-      : <Game className="flex justify-center"/>}
+      : <Game user={user} className="flex justify-center"/>}
     </div>
   )
 }

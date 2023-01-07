@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import loginService from '../services/login'
+import userService from '../services/user'
 
 const Login = ({ setUser }) => {
   const [username, setUsername] = useState('')
@@ -25,8 +26,19 @@ const Login = ({ setUser }) => {
     }
   }
 
+  const handleNewUser = async (event) => {
+    event.preventDefault()
+
+    try {
+      await userService.addUser({username, password})
+      handleLogin(event)
+    } catch (exception) {
+      console.log(exception)
+    }
+  }
+
   return (
-    <form onSubmit={(event) => handleLogin(event)}>
+    <form onSubmit={(event) => event.nativeEvent.submitter.value === 'login' ? handleLogin(event) : handleNewUser(event)}>
       <div>
         username:
         <input type='text'
@@ -41,7 +53,8 @@ const Login = ({ setUser }) => {
         onChange={(event) => setPassword(event.target.value)}
         ></input>
       </div>
-      <button type="submit" className="bg-white rounded-md">Login</button> 
+      <button type="submit" value="login" className="bg-white rounded-md">Login</button>
+      <button type="submit" value="signup" className="bg-white rounded-md">Sign up</button>
     </form>
   )
 }

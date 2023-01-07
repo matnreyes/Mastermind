@@ -21,7 +21,6 @@ usersRouter.post('/', async (req, res) => {
 
 // Route for updating user wins after a user wins
 usersRouter.put('/:username', async (req, res) => {
-  console.log(req.body.token)
   const { token } = req.body
   if (!jwt.verify(token, process.env.SECRET)) {
     const error = new Error('JWT token invalid')

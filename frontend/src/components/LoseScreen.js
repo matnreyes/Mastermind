@@ -1,6 +1,9 @@
 const LoseScreen = () => {
   return (
-    <h2>You lost</h2>
+    <div>
+      <h2>You lost</h2>
+      <button className="bg-amber-50">Play again?</button>
+    </div>
   )
 }
 

@@ -2,6 +2,23 @@
 **[Fly.io Deployment](https://matnreyes-mastermind.fly.dev/)**<br>
 Aliens from the fourth dimension have landed on Earth. With your musical genius, and our state of the art deciphering software, help us decipher their language to save our planet from total destruction. 
 
+### Instructions: 
+1. Open terminal and clone this repository:
+``` bash
+git clone https://github.com/matnreyes/Mastermind.git
+```
+2. Install project dependencies by running this command:
+``` bash
+npm install
+```
+3. Start Node server:
+``` bash
+npm run start
+```
+4. Open your favorite browser and visit 
+- http://localhost:8080
+
+
 ### Design:
 **Mockup of game design**<br>
 #### Mobile:<br>
@@ -19,17 +36,17 @@ I decided to use musical notes instead of pegs to highlight my time as a musicia
 
 # CLI Mastermind
 ### Instructions: 
-- Make sure Node is running on your device (you will need at least v.16): 
+1. Make sure Node is running on your device (you will need at least v.16): 
   - https://nodejs.org/
-- Run the git clone command on your Terminal:
+2. Run the git clone command on your Terminal:
 ``` bash
   git clone https://github.com/matnreyes/Mastermind.git
 ```
-- Install the project's dependencies:
+3. Install the project's dependencies:
 ``` bash
   npm install
 ```
-- Run start command:
+4. Run start command:
 ``` bash
   npm run mastermind
 ```
@@ -37,6 +54,7 @@ I decided to use musical notes instead of pegs to highlight my time as a musicia
 Run through:
 I decided that using functional principles was the best way to finish this simple game.
 Program consists of 4 functions.
+
 *Functions:*
 - main: runs all the processes required for running game, think of it as the session
 - fetchNumbers: uses Axios library to fetch random integers from random.API while parsing them into usable array

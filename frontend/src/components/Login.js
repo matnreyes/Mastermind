@@ -13,7 +13,8 @@ const Login = ({ setUser }) => {
       const loginResponse = await loginService({username, password})
       const user = {
         token:  loginResponse.token,
-        username: loginResponse.username
+        username: loginResponse.username,
+        tokenExpiration: loginResponse.tokenExpiration
       }
 
       window.localStorage.setItem('user', JSON.stringify(user))

@@ -10,9 +10,14 @@ const App = () => {
   // Set user from username and token stored in storage
   // TODO: create an hour timeout for user token
   useEffect(() => {
-    const loggerIn = JSON.parse(window.localStorage.getItem('user'))
-    if (loggerIn) {
-      setUser(loggerIn)
+    const loggedIn = JSON.parse(window.localStorage.getItem('user'))
+    if (loggedIn) {
+      const clientTime = new Date()
+      if (clientTime >= loggedIn.tokerExpiration) {
+        window.localStorage.removeItem('user')
+        return
+      } 
+      setUser(loggedIn)
     }
   }, [])
 

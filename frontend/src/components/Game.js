@@ -46,12 +46,12 @@ const Game = ({user}) => {
   }
 
   const activeGame = () => (
-    <div>
+    <div className="grid w-screen place-items-center p-2">
     {code === null 
       ? <DifficultyForm setGameDifficulty={setGameDifficulty}/>
       : 
       <div className="flex">
-        <div className="flex-direction:column p-2 h-full flex-shrink">
+        <div className="flex-direction:column p-2 flex-shrink">
           <h1 className="text-center text-amber-50 text-xl font-mono">Guess the code to save humanity</h1>
           <Turn setUserGuess={setUserGuess} difficulty={difficulty} guesses={guesses} results={results}/>
           {sendButtonActive &&

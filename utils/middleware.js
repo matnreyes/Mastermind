@@ -19,7 +19,7 @@ const errorHandler = (error, req, res, next) => {
   if (error.name === 'ValidationError') {
     return res.status(400).json({ error: error.message })
   }
-  if (error.name === 'InvalidGuessLength') {
+  if (error.name === 'InvalidGuessLength' || error.name === 'InvalidGuessRange') {
     return res.status(400).json({ error: error.message })
   }
   if (error.name === 'GameOver') {

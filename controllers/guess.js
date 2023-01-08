@@ -19,6 +19,14 @@ guessRouter.post('/', async (req, res) => {
     throw (error)
   }
 
+  // Validate guess
+  const outOfRange = guess.filter((n) => n < 0 || n > 7)
+  if (outOfRange.length > 0) {
+    const error = new Error('Guess must be within range of 0 to 7')
+    error.name = 'InvalidGuessRange'
+    throw error
+  }
+
   // Loads index of digits into hashMap
   const codeRecurrence = new Map()
   secretCode.forEach((number, index) => {

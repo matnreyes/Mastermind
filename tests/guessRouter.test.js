@@ -74,4 +74,15 @@ describe('Guess is checked', () => {
     expect(results.location).toEqual(4)
     expect(results.digit).toEqual(4)
   })
+
+  test('and has values out of range', async () => {
+    const guess = [-1, 3, 5, 3]
+
+    const guessResponse = await api
+      .post('/api/guess')
+      .send({ secretCode, guess })
+      .expect(400)
+
+    expect(guessResponse.body.error).toContain('Guess must be within range of 0 to 7')
+  })
 })

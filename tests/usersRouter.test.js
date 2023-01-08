@@ -24,4 +24,20 @@ describe('new user', () => {
 
     expect(userResponse.body.username).toEqual(user.username)
   })
+
+  test('cannot be added if password field empty', async () => {
+    const user = {
+      username: 'testUser',
+      password: ''
+    }
+
+    await api
+      .post('/api/users')
+      .send(user)
+      .expect(401)
+
+    const users = await User.find({})
+
+    expect(users.length).toEqual(0)
+  })
 })

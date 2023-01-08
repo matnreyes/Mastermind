@@ -6,6 +6,12 @@ const User = require('../models/user')
 usersRouter.post('/', async (req, res) => {
   const { username, password } = req.body
 
+  if (!username || !password) {
+    const error = new Error('You must provide username and password')
+    error.name = 'MissingCredentials'
+    throw error
+  }
+
   // Encrypt password
   const passwordHash = await bcrypt.hash(password, 10)
   const user = new User({

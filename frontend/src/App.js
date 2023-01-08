@@ -22,15 +22,21 @@ const App = () => {
   }
 
   return (
-    <div className="flex h-screen bg-slate-800 ">
+    <div className="flex h-screen bg-slate-800">
       {user === null 
-      ? <Login setUser={setUser}/>
+      ? 
+      <div className="w-screen h-screen place-items-center">
+        <Login setUser={setUser}/>
+      </div>
       :  
       <div>
-        <div id="nav-bar" className="flex w-screen  bg-amber-50 space-x-4">
-            <button className=" bg-orange-400 rounded-sm" onClick={() => setPage('game')}>Game</button>
-            <button className=" bg-orange-400 rounded-sm" onClick={() => setPage('leaderboard')}>Leaderboard</button>
-            <button className=" bg-orange-400 rounded-sm" onClick={() => handleLogout()}>Logout</button>
+        <div id="nav-bar" className="flex-none navbar bg-base-100 w-screen">
+          <div className="navbar-start"/>
+          <div className="navbar-center">
+            <button className="btn normal-case btn-ghost" onClick={() => setPage('game')}>Game</button>
+            <button className=" btn normal-case btn-ghost" onClick={() => setPage('leaderboard')}>Leaderboard</button>
+            <button className=" btn normal-case btn-ghost" onClick={() => handleLogout()}>Logout</button>
+          </div>
         </div>
         {
           page === 'game'

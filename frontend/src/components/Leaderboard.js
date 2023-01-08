@@ -12,14 +12,26 @@ const Leaderboard = () => {
     fetchPlayers()
   }, [])
   return (
-    <div>
-      {leaderboard.map((player, index) => 
-        <div key={index}>
-          {player.username} || {player.wins}
-        </div>
-        )
-      }
-    </div>
+   <div className="overflow-x-auto">
+    <table className="table w-full">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Player</th>
+          <th>Total wins</th>
+        </tr>
+      </thead>
+      <tbody>
+        {leaderboard.map((player, index) => 
+        <tr key={index}>
+          <th>{index}</th>
+          <td>{player.username}</td>
+          <td>{player.wins}</td>
+        </tr>
+        )}
+      </tbody>
+    </table>
+   </div>
   )
 }
 

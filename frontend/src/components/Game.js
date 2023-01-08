@@ -28,7 +28,7 @@ const Game = ({user}) => {
     if (gameStatus === 'won') {
       userService.updateWins(user.username, user.token)
     }
-  }, [gameStatus])
+  }, [gameStatus, user])
 
   const setGameDifficulty = async (event) => {
     const gameDifficulty = await codeService.fetchCode(event.target.value)

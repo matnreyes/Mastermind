@@ -107,7 +107,17 @@ const masterMind = async (tries, secretCode, codeMap) => {
 
 // Main game function
 const main = async () => {
-  const secretCode = await fetchNumbers()
+  let secretCode = []
+
+  // Offline generation of code
+  try {
+    secretCode = await fetchNumbers()
+  } catch (exception) {
+    for (let i = 0; i < 4; i += 1) {
+      secretCode.push(Math.floor(Math.random() * 8))
+    }
+  }
+
   const codeMap = await mapCode(secretCode)
   const tries = 1
   masterMind(tries, secretCode, codeMap)

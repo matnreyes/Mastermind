@@ -8,7 +8,7 @@ const GuessHistory = ({ guesses, results }) => {
       {guesses.map((guess, index) => 
         <div key={index} >
           <PreviousGuess guess={guess}/>
-          <Result result={results[index]} />
+          <Result result={results[index]} guess={guess} />
         </div>
       )}
     </div>

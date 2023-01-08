@@ -33,12 +33,12 @@ const SendButton = ({ guess, code, guesses, setGuesses, setGuess, setResult, res
       const audioCtx = new AudioContext()
       const gain = audioCtx.createGain()
       const oscillator = audioCtx.createOscillator()
-      oscillator.type = 'sine'
+      oscillator.type = 'curve'
       oscillator.connect(gain)
       oscillator.frequency.value = frequencies[note]
       oscillator.connect(audioCtx.destination)
-      oscillator.start(audioCtx.currentTime + (index * .5))
-      oscillator.stop(audioCtx.currentTime + index + 0.3)
+      oscillator.start(audioCtx.currentTime + index)
+      oscillator.stop(audioCtx.currentTime + index + 0.5)
     })
   }
 

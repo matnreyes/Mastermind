@@ -12,8 +12,8 @@ const App = () => {
   useEffect(() => {
     const loggedIn = JSON.parse(window.localStorage.getItem('user'))
     if (loggedIn) {
-      const clientTime = new Date()
-      if (clientTime >= loggedIn.tokerExpiration) {
+      const clientTime = (new Date()).getTime()
+      if (clientTime >= loggedIn.tokenExpiration || !loggedIn.tokenExpiration) {
         window.localStorage.removeItem('user')
         return
       } 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Guess = ({ setUserGuess, beatIndex }) => {
+const Guess = ({ setUserGuess, beatIndex, guess }) => {
   const [isActive, setIsActive] = useState(8)
 
   const setGuess = (event, beatIndex, index) => {

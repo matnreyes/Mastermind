@@ -45,6 +45,16 @@ const Game = ({user}) => {
     setGuess(guessArray)
   }
 
+  const endGame = () => {
+    if (gameStatus === 'active') {
+      return
+    }
+
+    return gameStatus === 'won'
+    ? <WinScreen setGameStatus={setGameStatus} setCode={setCode} />
+    : <LoseScreen />
+  }
+
   const activeGame = () => (
     <div className="grid w-screen place-items-center p-2">
     {code === null 
@@ -53,7 +63,7 @@ const Game = ({user}) => {
       <div className="flex">
         <div className="flex-direction:column p-2 flex-shrink">
           <h1 className="text-center text-amber-50 text-xl font-mono">Guess the code to save humanity</h1>
-          <Turn setUserGuess={setUserGuess} difficulty={difficulty} guesses={guesses} results={results}/>
+          <Turn setUserGuess={setUserGuess} difficulty={difficulty} guess={guess}/>
           {sendButtonActive &&
             <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses} setGuess={setGuess} results={results} setResult={setResult} setSendButtonActive={setSendButtonActive} setGameStatus={setGameStatus}/>
           }
@@ -66,13 +76,9 @@ const Game = ({user}) => {
 
   return (
     <div className="bg-slate-800 flex">
-      {gameStatus === 'won'
-      ? <WinScreen setGameStatus={setGameStatus} setCode={setCode}/>
-      : <div>
-        { gameStatus === 'lost'
-        ? <LoseScreen />
-        : activeGame() }
-        </div>}
+      {gameStatus === 'active' 
+      ? activeGame()
+      : endGame()}
     </div>
   )
 }

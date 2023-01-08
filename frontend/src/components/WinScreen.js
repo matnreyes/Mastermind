@@ -4,11 +4,13 @@ const WinScreen = ({ setGameStatus, setCode }) => {
     setGameStatus('active')
   }
   return (
-    <div className="grid w-screen place-items-center">
-      <div className="bg-green-200 rounded-lg flex flex-col p-5">
-        <h1 className="text-center">Congrats! You saved the Earth!</h1>
-        <h3 className="text-center">Would you like to play again?</h3>
-        <button onClick={() => restartGame()}> Play again</button>
+    <div className="card w-96 bg-primary text-primary-content">
+      <div className="card-body">
+        <h2 className="card-title">You won!</h2>
+        <p>You saved Earth from total destruction. Would you like to play again?</p>
+        <div className="card-actions">
+          <button onClick={() => restartGame()} className="btn">Play again</button>
+        </div>
       </div>
     </div>
   )

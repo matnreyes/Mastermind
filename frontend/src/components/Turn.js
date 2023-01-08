@@ -1,6 +1,6 @@
 import Guess from './Guess'
 
-const Turn = ({ difficulty, setUserGuess }) => {
+const Turn = ({ difficulty, setUserGuess, guess }) => {
   // Used to dynamically create buttons based on user difficulty preference
   const guessesArray = new Array(difficulty)
   guessesArray.fill(0)
@@ -9,7 +9,7 @@ const Turn = ({ difficulty, setUserGuess }) => {
     <div className="flex border bg-amber-50 rounded-lg">
       {guessesArray.map((n, beatIndex) => 
         <div key={beatIndex}>
-          <Guess setUserGuess={setUserGuess} beatIndex={beatIndex}/>
+          <Guess setUserGuess={setUserGuess} beatIndex={beatIndex} guess={guess}/>
           <div className="border"/>
         </div>  
       )}

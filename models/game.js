@@ -28,7 +28,7 @@ const gameSchema = new mongoose.Schema({
       required: true,
       ref: 'User'
     }
-  ],
+  ]
 })
 
 gameSchema.set('toJSON', {

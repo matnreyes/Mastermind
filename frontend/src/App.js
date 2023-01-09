@@ -7,18 +7,20 @@ import NavBar from './components/NavBar'
 const App = () => {
   const [user, setUser] = useState(null)
   const [page, setPage] = useState('')
+  const [useAudio, setUseAudio] = useState(false)
 
   // Set user from username and token stored in storage
-  // TODO: create an hour timeout for user token
   useEffect(() => {
-    const loggedIn = JSON.parse(window.localStorage.getItem('user'))
-    if (loggedIn) {
+    const loggedInUser = JSON.parse(window.localStorage.getItem('user'))
+    if (loggedInUser) {
       const clientTime = (new Date()).getTime()
-      if (clientTime >= loggedIn.tokenExpiration || !loggedIn.tokenExpiration) {
+      const isTokenExpired = clientTime >= loggedInUser.tokenExpiration || !loggedInUser.tokenExpiration
+      
+      if (isTokenExpired) {
         window.localStorage.removeItem('user')
         return
       } 
-      setUser(loggedIn)
+      setUser(loggedInUser)
     }
   }, [])
 
@@ -34,15 +36,13 @@ const App = () => {
       ? <Login setUser={setUser}/>
       :  
       <div>
-        <NavBar setPage={setPage} handleLogout={handleLogout}/>
+        <NavBar setPage={setPage} handleLogout={handleLogout} useAudio={useAudio} setUseAudio={setUseAudio}/>
         {
           page === 'game'
-          ? <Game user={user}/> 
+          ? <Game user={user} useAudio={useAudio}/> 
           : <Leaderboard />
         }
-      </div>
-      
-      }
+      </div>}
     </div>
   )
 }

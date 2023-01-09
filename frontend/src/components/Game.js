@@ -9,8 +9,9 @@ import GuessHistory from './GuessHistory'
 import WinScreen from './WinScreen'
 import LoseScreen from './LoseScreen'
 import TriesCountdown from './TriesCountdown'
+import TimeCountdown from './TimeCountdown'
 
-const Game = ({user}) => {
+const Game = ({user, useAudio }) => {
   const [difficulty, setDifficulty] = useState(4)
   const [code, setCode] = useState(null)
   const [guess, setGuess] = useState([])
@@ -30,6 +31,7 @@ const Game = ({user}) => {
   // Handle win
   useEffect(() => {
     if (gameStatus === 'won') {
+      gameService.setWin(game)
       userService.updateWins(user.username, user.token)
     }
   }, [gameStatus, user])
@@ -52,6 +54,7 @@ const Game = ({user}) => {
     setGuess(guessArray)
   }
 
+
   const endGame = () => {
     if (gameStatus === 'active') {
       return
@@ -72,12 +75,15 @@ const Game = ({user}) => {
           <div className="text-center py-4">
             <h3 className="text-5xl font-bold">Guess the musical code to save humanity</h3>
           </div>
-          <TriesCountdown tries={guesses.length}/>
+          <div className="flex flex-row content-center gap-10">
+            <TimeCountdown />
+            <TriesCountdown tries={guesses.length}/>
+          </div>
           <div className="md:flex gap-4">
             <div className="min-w-full">
               <Turn setUserGuess={setUserGuess} difficulty={difficulty} guess={guess} />
               {sendButtonActive &&
-                <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses} setGuess={setGuess} results={results} setResult={setResult} setSendButtonActive={setSendButtonActive} setGameStatus={setGameStatus} game={game} setGame={setGame} />
+                <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses} setGuess={setGuess} results={results} setResult={setResult} setSendButtonActive={setSendButtonActive} setGameStatus={setGameStatus} game={game} setGame={setGame} useAudio={useAudio}/>
               }
             </div>
             <GuessHistory guesses={guesses} results={results}/>

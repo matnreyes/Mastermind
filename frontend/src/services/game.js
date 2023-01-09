@@ -8,10 +8,15 @@ const newGame = async (difficulty, secretCode, userId) => {
 }
 
 const updateGame = async (game, update) => {
-  console.log(update)
   const gameResponse = await axios.put(`${baseUrl}/${game.id}`, update)
   return gameResponse.data
 }
-const gameService = {newGame, updateGame}
+
+const setWin = async (game) => {
+  const wonGame = {...game, won: true, finished: true}
+  const winResponse = await axios.put(`${baseUrl}/${game.id}`, wonGame)
+  return winResponse.data
+}
+const gameService = {newGame, updateGame, setWin}
 
 export default gameService

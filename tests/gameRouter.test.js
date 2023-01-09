@@ -52,21 +52,19 @@ describe('updating game', () => {
     const savedGame = await newGame.save()
     savedGame.id = savedGame._id.toString()
 
-    const game = {
-      finished: true,
-      won: true,
-      tries: 6,
-      secretCode: [4, 5, 6, 7]
-    }
+    savedGame.finished = true
+    savedGame.won = true
+    savedGame.tries = 6
+    savedGame.secretCode = [4, 5, 6, 7]
 
     const updatedGame = await api
       .put(`/api/games/${savedGame.id}`)
-      .send(game)
+      .send(savedGame._doc)
       .expect(200)
       .expect('Content-Type', /application\/json/)
 
-    expect(updatedGame.body.tries).toEqual(game.tries)
-    expect(updatedGame.body.secretCode).toEqual(newGame.secretCode)
+    expect(updatedGame.body.tries).toEqual(savedGame.tries)
+    expect(updatedGame.body.secretCode).toEqual(['1', '1', '1', '1'])
     expect(updatedGame.body.finished).toEqual(true)
   })
 })

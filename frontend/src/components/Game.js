@@ -11,15 +11,14 @@ import LoseScreen from './LoseScreen'
 import TriesCountdown from './TriesCountdown'
 import TimeCountdown from './TimeCountdown'
 
-const Game = ({user, useAudio }) => {
+const Game = ({user, useAudio, game, setGame }) => {
   const [difficulty, setDifficulty] = useState(4)
-  const [code, setCode] = useState(null)
+  const [code, setCode] = useState(game ? game.code : null)
   const [guess, setGuess] = useState([])
-  const [guesses, setGuesses] = useState([])
-  const [results, setResult] = useState([])
+  const [guesses, setGuesses] = useState(game ? game.guesses : [])
+  const [results, setResult] = useState(game ? game.results : [])
   const [sendButtonActive, setSendButtonActive] = useState(false)
   const [gameStatus, setGameStatus] = useState('active')
-  const [game, setGame] = useState(null)
 
   // Reset game
   useEffect(() => {
@@ -30,6 +29,7 @@ const Game = ({user, useAudio }) => {
 
   // Handle win
   useEffect(() => {
+
     if (gameStatus === 'won') {
       gameService.setWin(game)
       userService.updateWins(user.username, user.token)
@@ -40,6 +40,8 @@ const Game = ({user, useAudio }) => {
   const setGameDifficulty = async (event) => {
     const code = await codeService.fetchCode(event.target.value)
     const gameInfo = await gameService.newGame(code.length, code, user.userId)
+    // Store game in localStorage
+    window.localStorage.setItem('game', JSON.stringify(gameInfo))
     setGame(gameInfo)
     setDifficulty(code.length)
     setCode(code)
@@ -76,7 +78,7 @@ const Game = ({user, useAudio }) => {
             <h3 className="text-5xl font-bold">Guess the musical code to save humanity</h3>
           </div>
           <div className="flex flex-row content-center gap-10">
-            <TimeCountdown />
+            <TimeCountdown setGameStatus={setGameStatus} endTime={game.endTime}/>
             <TriesCountdown tries={guesses.length}/>
           </div>
           <div className="md:flex gap-4">

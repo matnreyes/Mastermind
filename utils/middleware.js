@@ -38,6 +38,9 @@ const errorHandler = (error, req, res, next) => {
   if (error.name === 'InvalidCredentials' || error.name === 'MissingCredentials') {
     return res.status(401).json({ error: error.message })
   }
+  if (error.name === 'OutOfTime') {
+    return res.status(401).json({ error: error.message })
+  }
 
   next(error)
 }

@@ -33,20 +33,33 @@ gameRouter.put('/:id', async (req, res) => {
     tries,
     won,
     finished,
-    gameTime,
+    startTime,
+    endTime,
     guesses,
     results
   } = req.body
 
   // Prevent users from updating everything
+  const currentTime = (new Date(Date.now()).getTime())
   const updatedGame = {
     tries,
     won,
     finished,
-    gameTime,
     guesses,
-    results
+    results,
+    gameTime: ((currentTime - startTime) / 1000)
   }
+
+  const gameLost = !updatedGame.won && updatedGame.finished
+  if (!gameLost) {
+    const outOfTime = endTime < currentTime
+    if (outOfTime) {
+      const error = new Error('Out of time')
+      error.name = ('OutOfTime')
+      throw error
+    }
+  }
+
   const game = await Game.findByIdAndUpdate(req.params.id, updatedGame, { new: true })
   res.status(200).json(game)
 })

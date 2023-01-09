@@ -24,7 +24,7 @@ const gameSchema = new mongoose.Schema({
   },
   endTime: {
     type: Number,
-    default: (new Date(Date.now() + 1000 * 60)).getTime()
+    default: (new Date(Date.now() + 1000 * 90)).getTime()
   },
   secretCode: [{
     type: String

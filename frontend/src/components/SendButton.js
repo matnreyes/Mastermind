@@ -13,7 +13,7 @@ const SendButton = ({ guess, code, guesses, setGuesses, setGuess, setResult, res
     }
 
     // Check guess and update tries on game
-    const response = await guessService.validateGuess(code, guess, guesses.length) 
+    const response = await guessService.validateGuess(code, guess, guesses.length, game.endTime) 
     const updatedGame = await gameService.updateGame(game, {...game, tries: game.tries + 1, guesses: game.guesses.concat([guess]), results: game.results.concat(response)})
     setGame(updatedGame)
     if (response.location === code.length) {

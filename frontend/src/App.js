@@ -8,12 +8,13 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [page, setPage] = useState('')
   const [useAudio, setUseAudio] = useState(false)
+  const [game, setGame] = useState(null)
 
   // Set user from username and token stored in storage
   useEffect(() => {
     const loggedInUser = JSON.parse(window.localStorage.getItem('user'))
+    const clientTime = (new Date()).getTime()
     if (loggedInUser) {
-      const clientTime = (new Date()).getTime()
       const isTokenExpired = clientTime >= loggedInUser.tokenExpiration || !loggedInUser.tokenExpiration
       
       if (isTokenExpired) {
@@ -21,6 +22,16 @@ const App = () => {
         return
       } 
       setUser(loggedInUser)
+    }
+
+    const gameInSession = JSON.parse(window.localStorage.getItem('game'))
+    if (gameInSession) {
+      const isGameOver = gameInSession.endTime < clientTime
+      if (isGameOver) {
+        window.localStorage.removeItem('game')
+        return
+      }
+      setGame(gameInSession)
     }
   }, [])
 
@@ -39,7 +50,7 @@ const App = () => {
         <NavBar setPage={setPage} handleLogout={handleLogout} useAudio={useAudio} setUseAudio={setUseAudio}/>
         {
           page === 'game'
-          ? <Game user={user} useAudio={useAudio}/> 
+          ? <Game user={user} useAudio={useAudio} game={game} setGame={setGame}/> 
           : <Leaderboard />
         }
       </div>}

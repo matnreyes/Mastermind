@@ -11,7 +11,7 @@ leaderboardRouter.get('/', async (req, res) => {
   */
   const users = await User.find({})
   users.sort((a, b) => b.wins - a.wins)
-  const topTen = users.slice(0, 9)
+  const topTen = users.slice(0, 10)
   const leaderboard = topTen.map((p) => {
     const player = {
       username: p.username,

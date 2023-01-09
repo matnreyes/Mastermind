@@ -24,7 +24,7 @@ const Leaderboard = () => {
         <tbody>
           {leaderboard.map((player, index) => 
           <tr key={index}>
-            <th>{index}</th>
+            <th>{index + 1}</th>
             <td>{player.username}</td>
             <td>{player.wins}</td>
           </tr>

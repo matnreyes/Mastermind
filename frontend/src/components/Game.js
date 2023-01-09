@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import codeService from '../services/code'
 import userService from '../services/user'
+import gameService from '../services/game'
 import Turn from './Turn'
 import DifficultyForm from './Difficulty'
 import SendButton from './SendButton'
@@ -17,24 +18,29 @@ const Game = ({user}) => {
   const [results, setResult] = useState([])
   const [sendButtonActive, setSendButtonActive] = useState(false)
   const [gameStatus, setGameStatus] = useState('active')
+  const [game, setGame] = useState(null)
 
+  // Reset game
   useEffect(() => {
     setGuess([])
     setGuesses([])
     setResult([])
-
   }, [code])
 
+  // Handle win
   useEffect(() => {
     if (gameStatus === 'won') {
       userService.updateWins(user.username, user.token)
     }
   }, [gameStatus, user])
 
+  
   const setGameDifficulty = async (event) => {
-    const gameDifficulty = await codeService.fetchCode(event.target.value)
-    setDifficulty(gameDifficulty.length)
-    setCode(gameDifficulty)
+    const code = await codeService.fetchCode(event.target.value)
+    const gameInfo = await gameService.newGame(code.length, code, user.userId)
+    setGame(gameInfo)
+    setDifficulty(code.length)
+    setCode(code)
   }
 
   const setUserGuess = async (event, beatIndex) => {
@@ -59,7 +65,7 @@ const Game = ({user}) => {
   const activeGame = () => (
     <>
       {code === null 
-      ? <DifficultyForm setGameDifficulty={setGameDifficulty}/>
+      ? <DifficultyForm setGameDifficulty={setGameDifficulty} />
       : 
         <div className="hero-content flex-col pt-8">
           <br></br>
@@ -71,7 +77,7 @@ const Game = ({user}) => {
             <div className="min-w-full">
               <Turn setUserGuess={setUserGuess} difficulty={difficulty} guess={guess} />
               {sendButtonActive &&
-                <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses} setGuess={setGuess} results={results} setResult={setResult} setSendButtonActive={setSendButtonActive} setGameStatus={setGameStatus}/>
+                <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses} setGuess={setGuess} results={results} setResult={setResult} setSendButtonActive={setSendButtonActive} setGameStatus={setGameStatus} game={game} setGame={setGame} />
               }
             </div>
             <GuessHistory guesses={guesses} results={results}/>

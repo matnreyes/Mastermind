@@ -1,4 +1,4 @@
-const DifficultyForm = ({ setGameDifficulty }) => {
+const DifficultyForm = ({ setGameDifficulty, setGame }) => {
   return (
     <div className="card w-96 bg-neutral text-neutral-content shadow-lg border border-secondary-content border-shadow">
       <div className="card-body items-center text-center">

@@ -1,14 +1,17 @@
 import guessService from '../services/guesses'
+import gameService from '../services/game'
 
-const SendButton = ({ guess, code, guesses, setGuesses, setGuess, setResult, results, setSendButtonActive, setGameStatus }) => {
-  const handleClick = async () => {
+const SendButton = ({ guess, code, guesses, setGuesses, setGuess, setResult, results, setSendButtonActive, setGameStatus, game, setGame }) => {
+  const handleGuess = async () => {
     // Play sound for each note
     guess.forEach((note, index) => {
       handleSounds(note, index)
     })
 
-    // Check guess
-    const response = await guessService.validateGuess(code, guess, guesses.length)
+    // Check guess and update tries on game
+    const response = await guessService.validateGuess(code, guess, guesses.length) 
+    const updatedGame = await gameService.updateGame(game, {...game, tries: game.tries + 1, guesses: game.guesses.concat([guess]), results: game.results.concat(response)})
+    setGame(updatedGame)
     if (response.location === code.length) {
       setGameStatus('won')
       return
@@ -45,7 +48,7 @@ const SendButton = ({ guess, code, guesses, setGuesses, setGuess, setResult, res
   return (
     <button
       className="btn gap-2 btn-secondary text-secondary-content min-w-full"
-      onClick={() => handleClick()}
+      onClick={() => handleGuess()}
     >
       Send guess
       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

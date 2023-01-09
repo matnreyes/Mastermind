@@ -13,7 +13,8 @@ const Login = ({ setUser }) => {
       const loginResponse = await loginService({username, password})
       const user = {
         token:  loginResponse.token,
-        username: loginResponse.username,
+        username: loginResponse.user.username,
+        userId: loginResponse.user.id,
         tokenExpiration: loginResponse.tokenExpiration
       }
 

@@ -52,8 +52,8 @@ const Game = ({user}) => {
     }
 
     return gameStatus === 'won'
-    ? <WinScreen setGameStatus={setGameStatus} setCode={setCode} triesLeft={10 - results.length}/>
-    : <LoseScreen />
+    ? <WinScreen setGameStatus={setGameStatus} setCode={setCode} triesLeft={10 - results.length} />
+    : <LoseScreen setCode={setCode} setGameStatus={setGameStatus} />
   }
 
   const activeGame = () => (
@@ -69,7 +69,7 @@ const Game = ({user}) => {
           <TriesCountdown tries={guesses.length}/>
           <div className="md:flex gap-4">
             <div className="min-w-full">
-              <Turn setUserGuess={setUserGuess} difficulty={difficulty} guess={guess} triesLeft={10 - guesses.length} />
+              <Turn setUserGuess={setUserGuess} difficulty={difficulty} guess={guess} />
               {sendButtonActive &&
                 <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses} setGuess={setGuess} results={results} setResult={setResult} setSendButtonActive={setSendButtonActive} setGameStatus={setGameStatus}/>
               }

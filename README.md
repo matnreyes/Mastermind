@@ -39,7 +39,7 @@ I decided to use musical notes instead of pegs to highlight my time as a musicia
 - [x] Multiple difficulties
 - [x] Server-side code generation if API fails
 - [x] Sound when sending guess
-- [ ] Number of remaining guesses
+- [x] Number of remaining guesses
 - [ ] Hints
 - [ ] Timer
 - [ ] Multiplayer

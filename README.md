@@ -40,9 +40,9 @@ I decided to use musical notes instead of pegs to highlight my time as a musicia
 - [x] Server-side code generation if API fails
 - [x] Sound when sending guess
 - [x] Number of remaining guesses
-- [ ] Hints
-- [ ] Timer
-- [ ] Game session stored in DB
+- [x] Hints
+- [x] Timer
+- [x] Game session stored in DB
 - [ ] Multiplayer
 
 ### Notes

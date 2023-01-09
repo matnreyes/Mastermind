@@ -41,6 +41,7 @@ app.use('/api/code', codeRouter)
 app.use('/api/leaderboard', leaderboardRouter)
 app.use('/api/games', gameRouter)
 
+app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
 module.exports = app

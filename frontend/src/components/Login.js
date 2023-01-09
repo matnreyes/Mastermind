@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import loginService from '../services/login'
 import userService from '../services/user'
+import gameService from '../services/game'
 
 const Login = ({ setUser }) => {
   const [username, setUsername] = useState('')
@@ -17,6 +18,8 @@ const Login = ({ setUser }) => {
         userId: loginResponse.user.id,
         tokenExpiration: loginResponse.tokenExpiration
       }
+
+      gameService.setToken(loginResponse.token)
 
       window.localStorage.setItem('user', JSON.stringify(user))
       setUser(user)

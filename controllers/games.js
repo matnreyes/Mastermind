@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const gameRouter = require('express').Router()
+const { tokenExtractor } = require('../utils/middleware')
 const Game = require('../models/game')
 const User = require('../models/user')
 
@@ -28,7 +29,7 @@ gameRouter.post('/', async (req, res) => {
 })
 
 // Flexible update route for game
-gameRouter.put('/:id', async (req, res) => {
+gameRouter.put('/:id', tokenExtractor, async (req, res) => {
   const {
     tries,
     won,
@@ -47,8 +48,9 @@ gameRouter.put('/:id', async (req, res) => {
     finished,
     guesses,
     results,
-    gameTime: ((currentTime - startTime) / 1000)
+    gameTime: (Math.floor(currentTime - startTime) / 1000)
   }
+  console.log(req.body)
 
   const gameLost = !updatedGame.won && updatedGame.finished
   if (!gameLost) {

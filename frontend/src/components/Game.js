@@ -10,6 +10,7 @@ import WinScreen from './WinScreen'
 import LoseScreen from './LoseScreen'
 import TriesCountdown from './TriesCountdown'
 import TimeCountdown from './TimeCountdown'
+import HintButton from './HintButton'
 
 const Game = ({user, useAudio, game, setGame }) => {
   const [difficulty, setDifficulty] = useState(game ? game.difficulty : 4)
@@ -29,10 +30,14 @@ const Game = ({user, useAudio, game, setGame }) => {
 
   // Handle win
   useEffect(() => {
-
     if (gameStatus === 'won') {
       gameService.setWin(game)
       userService.updateWins(user.username, user.token)
+    }
+    if (gameStatus === 'lost') {
+      gameService.setLoss()
+      setGame(null)
+      window.localStorage.removeItem('game')
     }
   }, [gameStatus, user])
 
@@ -80,6 +85,7 @@ const Game = ({user, useAudio, game, setGame }) => {
           <div className="flex flex-row content-center gap-10">
             <TimeCountdown setGameStatus={setGameStatus} endTime={game.endTime}/>
             <TriesCountdown tries={guesses.length}/>
+            <HintButton secretCode={code}/>
           </div>
           <div className="md:flex gap-4">
             <div className="min-w-full">

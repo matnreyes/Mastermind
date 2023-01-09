@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import gameService from './services/game'
 import Game from './components/Game'
 import Login from './components/Login'
 import Leaderboard from './components/Leaderboard'
@@ -20,7 +21,8 @@ const App = () => {
       if (isTokenExpired) {
         window.localStorage.removeItem('user')
         return
-      } 
+      }
+      gameService.setToken(loggedInUser.token)
       setUser(loggedInUser)
     }
 

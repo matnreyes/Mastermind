@@ -10,13 +10,15 @@ const codeRouter = require('./controllers/code')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const leaderboardRouter = require('./controllers/leaderboard')
+const gameRouter = require('./controllers/games')
 
 const app = express()
 
 logger.info('Connecting to MongoDB', MONGODB_URI)
 
-mongoose.set('strictQuery', false)
-mongoose.connect(MONGODB_URI)
+mongoose
+  .set('strictQuery', false)
+  .connect(MONGODB_URI)
   .then(() => {
     logger.info('Connected to MongoDB')
   })
@@ -37,6 +39,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/guess', guessRouter)
 app.use('/api/code', codeRouter)
 app.use('/api/leaderboard', leaderboardRouter)
+app.use('/api/games', gameRouter)
 
 app.use(middleware.errorHandler)
 

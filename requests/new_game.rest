@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/games
+Content-Type: application/json
+
+{
+  "user": "{id: 63b8bdf13b0445e1d427cc99}",
+  "difficulty": "5"
+}

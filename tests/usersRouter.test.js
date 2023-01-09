@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
 
@@ -64,4 +65,8 @@ describe('new user', () => {
 
     expect(users).toHaveLength(1)
   })
+})
+
+afterAll(() => {
+  mongoose.connection.close()
 })

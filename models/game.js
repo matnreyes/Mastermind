@@ -6,6 +6,10 @@ const gameSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  difficulty: {
+    type: Number,
+    default: 4
+  },
   won: {
     type: Boolean,
     default: false
@@ -22,13 +26,18 @@ const gameSchema = new mongoose.Schema({
     type: Number,
     default: (new Date(Date.now() + 1000 * 60)).getTime()
   },
-  user: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'User'
-    }
-  ]
+  secretCode: [{
+    type: String
+  }],
+  gameTime: {
+    type: Number,
+    default: 0
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
+  }
 })
 
 gameSchema.set('toJSON', {

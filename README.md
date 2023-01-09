@@ -42,6 +42,7 @@ I decided to use musical notes instead of pegs to highlight my time as a musicia
 - [x] Number of remaining guesses
 - [ ] Hints
 - [ ] Timer
+- [ ] Game session stored in DB
 - [ ] Multiplayer
 
 ### Notes

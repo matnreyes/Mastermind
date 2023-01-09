@@ -11,7 +11,16 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   passwordHash: String,
-  wins: Number
+  wins: {
+    type: Number,
+    default: 0
+  },
+  games: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Game'
+    }
+  ]
 })
 
 userSchema.plugin(uniqueValidator)

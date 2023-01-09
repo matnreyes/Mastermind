@@ -11,8 +11,7 @@ gameRouter.get('/', async (req, res) => {
 
 // Start a new game in DB
 gameRouter.post('/', async (req, res) => {
-  const { difficulty, secretCode } = req.body
-  const userId = req.body.user.id
+  const { difficulty, secretCode, userId } = req.body
   const user = await User.findById(userId)
 
   const newGame = new Game({
@@ -34,7 +33,9 @@ gameRouter.put('/:id', async (req, res) => {
     tries,
     won,
     finished,
-    gameTime
+    gameTime,
+    guesses,
+    results
   } = req.body
 
   // Prevent users from updating everything
@@ -42,7 +43,9 @@ gameRouter.put('/:id', async (req, res) => {
     tries,
     won,
     finished,
-    gameTime
+    gameTime,
+    guesses,
+    results
   }
   const game = await Game.findByIdAndUpdate(req.params.id, updatedGame, { new: true })
   res.status(200).json(game)

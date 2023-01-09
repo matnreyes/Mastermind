@@ -33,6 +33,12 @@ const gameSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  guesses: {
+    type: Array
+  },
+  results: {
+    type: Array
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,

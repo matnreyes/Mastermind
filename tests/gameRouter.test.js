@@ -24,12 +24,13 @@ beforeEach(async () => {
 
 describe('starting game', () => {
   test('works when all parameters are met', async () => {
+    const userId = user.id
     const difficulty = 5
     const secretCode = [8, 1, 3, 4, 5]
 
     const gameResponse = await api
       .post('/api/games')
-      .send({ user, difficulty, secretCode })
+      .send({ userId, difficulty, secretCode })
       .expect(201)
       .expect('Content-Type', /application\/json/)
 

@@ -31,7 +31,7 @@ describe('user login', () => {
       .expect(200)
 
     expect(loginResponse.body.token).toBeDefined()
-    expect(loginResponse.body.username).toEqual(user.username)
+    expect(loginResponse.body.user.username).toEqual(user.username)
   })
 
   test('fails with 401 status if credentials are invalid', async () => {

@@ -6,13 +6,19 @@ const Turn = ({ difficulty, setUserGuess, guess }) => {
   guessesArray.fill(0)
 
   return (
-    <div className="flex border bg-amber-50 rounded-lg">
-      {guessesArray.map((n, beatIndex) => 
-        <div key={beatIndex}>
-          <Guess setUserGuess={setUserGuess} beatIndex={beatIndex} guess={guess}/>
-          <div className="border"/>
-        </div>  
-      )}
+    <div className="card w-full bg-base-100 shadow-xl ">
+      <div className="card-body">
+        <div className={`flex flex-col-${difficulty}`}>
+          {
+            guessesArray.map((n, beatIndex) => 
+              <div className="w-full" key={beatIndex}>
+                <Guess setUserGuess={setUserGuess} beatIndex={beatIndex} guess={guess}/>
+              </div>
+            )
+          }
+        </div>
+
+      </div>
     </div>
   )
 }

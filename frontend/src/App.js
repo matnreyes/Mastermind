@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Game from './components/Game'
 import Login from './components/Login'
 import Leaderboard from './components/Leaderboard'
+import NavBar from './components/NavBar'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -27,25 +28,16 @@ const App = () => {
   }
 
   return (
-    <div className="flex h-screen bg-slate-800">
+    <div className="hero min-h-screen bg-base-200" style={{ backgroundImage: `url("https://i.ibb.co/L0wpXJx/5465339.jpg")` }}>
+      <div className="hero-overlay bg-opacity-60" />
       {user === null 
-      ? 
-      <div className="w-screen h-screen place-items-center">
-        <Login setUser={setUser}/>
-      </div>
+      ? <Login setUser={setUser}/>
       :  
       <div>
-        <div id="nav-bar" className="flex-none navbar bg-base-100 w-screen">
-          <div className="navbar-start"/>
-          <div className="navbar-center">
-            <button className="btn normal-case btn-ghost" onClick={() => setPage('game')}>Game</button>
-            <button className=" btn normal-case btn-ghost" onClick={() => setPage('leaderboard')}>Leaderboard</button>
-            <button className=" btn normal-case btn-ghost" onClick={() => handleLogout()}>Logout</button>
-          </div>
-        </div>
+        <NavBar setPage={setPage} handleLogout={handleLogout}/>
         {
           page === 'game'
-          ? <Game user={user} className="flex justify-center"/> 
+          ? <Game user={user}/> 
           : <Leaderboard />
         }
       </div>

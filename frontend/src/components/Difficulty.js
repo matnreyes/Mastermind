@@ -1,6 +1,6 @@
 const DifficultyForm = ({ setGameDifficulty }) => {
   return (
-    <div className="card w-96 bg-neutral text-neutral-content">
+    <div className="card w-96 bg-neutral text-neutral-content shadow-lg border border-secondary-content border-shadow">
       <div className="card-body items-center text-center">
         <h5 className="card-title">Select a difficulty</h5>
         <div className="card-actions justify-end">

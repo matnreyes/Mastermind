@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import codeService from '../services/code'
+import userService from '../services/user'
 import Turn from './Turn'
 import DifficultyForm from './Difficulty'
 import SendButton from './SendButton'
 import GuessHistory from './GuessHistory'
 import WinScreen from './WinScreen'
 import LoseScreen from './LoseScreen'
-import userService from '../services/user'
+import TriesCountdown from './TriesCountdown'
 
 const Game = ({user}) => {
   const [difficulty, setDifficulty] = useState(4)
@@ -51,35 +52,40 @@ const Game = ({user}) => {
     }
 
     return gameStatus === 'won'
-    ? <WinScreen setGameStatus={setGameStatus} setCode={setCode} />
+    ? <WinScreen setGameStatus={setGameStatus} setCode={setCode} triesLeft={10 - results.length}/>
     : <LoseScreen />
   }
 
   const activeGame = () => (
-    <div className="grid w-screen place-items-center p-2">
-    {code === null 
+    <>
+      {code === null 
       ? <DifficultyForm setGameDifficulty={setGameDifficulty}/>
       : 
-      <div className="flex">
-        <div className="flex-direction:column p-2 flex-shrink">
-          <h1 className="text-center text-amber-50 text-xl font-mono">Guess the code to save humanity</h1>
-          <Turn setUserGuess={setUserGuess} difficulty={difficulty} guess={guess}/>
-          {sendButtonActive &&
-            <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses} setGuess={setGuess} results={results} setResult={setResult} setSendButtonActive={setSendButtonActive} setGameStatus={setGameStatus}/>
-          }
-        </div>
-        <GuessHistory guesses={guesses} results={results}/>
-      </div>
-    }
-    </div>
+        <div className="hero-content flex-col pt-8">
+          <br></br>
+          <div className="text-center py-4">
+            <h3 className="text-5xl font-bold">Guess the musical code to save humanity</h3>
+          </div>
+          <TriesCountdown tries={guesses.length}/>
+          <div className="md:flex gap-4">
+            <div className="min-w-full">
+              <Turn setUserGuess={setUserGuess} difficulty={difficulty} guess={guess} triesLeft={10 - guesses.length} />
+              {sendButtonActive &&
+                <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses} setGuess={setGuess} results={results} setResult={setResult} setSendButtonActive={setSendButtonActive} setGameStatus={setGameStatus}/>
+              }
+            </div>
+            <GuessHistory guesses={guesses} results={results}/>
+          </div>
+        </div>}
+    </>
   )
 
   return (
-    <div className="bg-slate-800 flex">
+    <>
       {gameStatus === 'active' 
       ? activeGame()
       : endGame()}
-    </div>
+    </>
   )
 }
 

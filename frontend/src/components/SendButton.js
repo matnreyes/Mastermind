@@ -44,10 +44,14 @@ const SendButton = ({ guess, code, guesses, setGuesses, setGuess, setResult, res
 
   return (
     <button
-      className='w-full h-20 aspect-square bg-red-500 rounded-lg text-amber-50'
+      className="btn gap-2 btn-secondary text-secondary-content min-w-full"
       onClick={() => handleClick()}
     >
       Send guess
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path d="M2.5,12A9.5,9.5,0,1,1,12,21.5" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
+        <path d="M7.5,12A4.5,4.5,0,1,1,12,16.5" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
+      </svg>
     </button>
   )
 }

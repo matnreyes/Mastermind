@@ -12,8 +12,8 @@ import TriesCountdown from './TriesCountdown'
 import TimeCountdown from './TimeCountdown'
 
 const Game = ({user, useAudio, game, setGame }) => {
-  const [difficulty, setDifficulty] = useState(4)
-  const [code, setCode] = useState(game ? game.code : null)
+  const [difficulty, setDifficulty] = useState(game ? game.difficulty : 4)
+  const [code, setCode] = useState(game ? game.secretCode : null)
   const [guess, setGuess] = useState([])
   const [guesses, setGuesses] = useState(game ? game.guesses : [])
   const [results, setResult] = useState(game ? game.results : [])

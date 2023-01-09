@@ -3,7 +3,7 @@ const app = require('../app')
 
 const api = supertest(app)
 
-describe('Guess is checked', () => {
+describe('guess is checked', () => {
   const secretCode = [1, 2, 3, 4]
 
   test('and fails if guess is larger than code', async () => {

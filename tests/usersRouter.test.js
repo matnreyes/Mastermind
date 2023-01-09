@@ -40,4 +40,28 @@ describe('new user', () => {
 
     expect(users.length).toEqual(0)
   })
+
+  test('cannot be added if username in database', async () => {
+    const user = new User({
+      username: 'testUsername',
+      password: 'password',
+      wins: 0
+    })
+
+    await user.save()
+
+    const duplicateUser = {
+      username: 'testUsername',
+      password: 'password'
+    }
+
+    await api
+      .post('/api/users')
+      .send(duplicateUser)
+      .expect(400)
+
+    const users = await User.find({})
+
+    expect(users).toHaveLength(1)
+  })
 })

@@ -50,7 +50,6 @@ gameRouter.put('/:id', tokenExtractor, async (req, res) => {
     results,
     gameTime: (Math.floor(currentTime - startTime) / 1000)
   }
-  console.log(req.body)
 
   const gameLost = !updatedGame.won && updatedGame.finished
   if (!gameLost) {

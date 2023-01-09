@@ -8,18 +8,28 @@ const Game = require('../models/game')
 const api = supertest(app)
 
 let user = 0
+let token = 0
 
 beforeEach(async () => {
   await User.deleteMany({})
   await Game.deleteMany({})
 
-  const player = new User({
+  const player = {
     username: 'testUsername',
     password: 'password'
-  })
-  const savedUser = await player.save()
-  const JSONuser = JSON.stringify(savedUser)
-  user = JSON.parse(JSONuser)
+  }
+
+  const newUser = await api
+    .post('/api/users')
+    .send(player)
+
+  user = newUser.body
+
+  const loggedIn = await api
+    .post('/api/login')
+    .send(player)
+
+  token = `bearer ${loggedIn.body.token}`
 })
 
 describe('starting game', () => {
@@ -60,6 +70,7 @@ describe('updating game', () => {
     const updatedGame = await api
       .put(`/api/games/${savedGame.id}`)
       .send(savedGame._doc)
+      .set('authorization', token)
       .expect(200)
       .expect('Content-Type', /application\/json/)
 

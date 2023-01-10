@@ -21,6 +21,7 @@ Inspired by:
 - Simple CI pipeline that saved me the trouble or running lint script
 
 ## Installation
+- .env file has been provided
 1. Install Node.js on your device. You will need at least Node v.16. [Follow the installer instructions here](https://nodejs.org/).
 2. Run the git clone command from your Terminal:
 ``` bash
@@ -47,8 +48,9 @@ htttp://localhost:3000/
 5. Hover over spaces to reveal guess color. Click to select. When all guesses filled in, submit button appears. Guess input does not reset after each guess, you will have to start your guess over.
 6. Hovering over stars explains meaning in toolbox.
 7. You have 90 seconds and 10 guesses. When timer or guesses run out, you will be take to the LoseGame screen.
-8. If you win, you're taken to the WinScreen and your account is updated with the win.
-9. Top ten players are shown on leaderboard.
+8. Hint button gives you the first tone of the secret code. Mute switch can be found on top left of navbar.
+9. If you win, you're taken to the WinScreen and your account is updated with the win.
+10. Top ten players are shown on leaderboard.
 
 
 ### Mastermind CLI

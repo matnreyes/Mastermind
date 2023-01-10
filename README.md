@@ -1,5 +1,5 @@
 # Mastermind of the Third Kind
-### [Deployment Link](htttps://matnreyes-mastermind.fly.dev)
+### [Deployment Link](https://matnreyes-mastermind.fly.dev)
 
 ### Aliens from the fourth dimension have landed on Earth. With your musical genius, and our state of the art deciphering software, help us decipher their language to save our planet from total destruction.
 Inspired by:

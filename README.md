@@ -1,92 +1,131 @@
 # Mastermind of the Third Kind
-**[Fly.io Deployment](https://matnreyes-mastermind.fly.dev/)**<br>
-Aliens from the fourth dimension have landed on Earth. With your musical genius, and our state of the art deciphering software, help us decipher their language to save our planet from total destruction. 
 
-### Instructions: 
-1. Make sure Node is installed on your system. Follow these instructions:
-- https://nodejs.org/
-2. Open terminal and clone this repository:
-``` bash
-git clone https://github.com/matnreyes/Mastermind.git
-```
-3. Install project dependencies by running this command:
-``` bash
-npm install
-```
-4. Start Node server:
-``` bash
-npm run start
-```
-5. Open your favorite browser and visit 
-- http://localhost:8080
+### Aliens from the fourth dimension have landed on Earth. With your musical genius, and our state of the art deciphering software, help us decipher their language to save our planet from total destruction.
 
+## Features
+- Leaderboard
+- Responsive design
+- Audio with toggle
+- User sign-up and sign-in
+- User authorization
+- Tests
+- Multiple difficulties (easy,  medium, hard)
+- Calls to random Integer API, server-side code generation if API call fails
+- Timer and guess countdown
+    - Timer is server and client-side
+- CLI version of Mastermind
+- Simple CI pipeline that saved me the trouble or running lint script
 
-### Design:
-**Mockup of game design**<br>
-#### Mobile:<br>
-![mobile](https://i.ibb.co/3zvVssk/i-Phone-14-Pro-Max-1.png)
-
-- Idea:
-I decided to use musical notes instead of pegs to highlight my time as a musician. The concept of Close Encounters of the Third Kind makes this fun and highlights my geek side. The goal is to play the sound of the notes once player hits submit on guess. 
-
-### Web sequence diagram:
-**Logged in user winning game:**
-![websequencediagram](https://i.ibb.co/ZHDc6nj/67-C3-BA07-61-E6-49-E3-B20-C-CADC13-A9454-B.jpg)
-
-### Feature goals:
-- [x] Users creation and login connected to DB
-- [x] Leaderboard
-- [x] Multiple difficulties
-- [x] Server-side code generation if API fails
-- [x] Sound when sending guess
-- [x] Number of remaining guesses
-- [x] Hints
-- [x] Timer
-- [x] Game session stored in DB
-- [ ] Multiplayer
-
-### Notes
-- The .env file is exposed for the sake of sharing project, otherwise, it would be gitignored
-
-# CLI Mastermind
-### Instructions: 
-1. Make sure Node is running on your device (you will need at least v.16): 
-  - https://nodejs.org/
-2. Run the git clone command on your Terminal:
+## Installation
+1. Install Node.js on your device. You will need at least Node v.16. [Follow the installer instructions here](https://nodejs.org/).
+2. Run the git clone command from your Terminal:
 ``` bash
   git clone https://github.com/matnreyes/Mastermind.git
 ```
 3. Install the project's dependencies:
-``` bash
-  npm install
-```
-4. Run start command:
-``` bash
-  npm run mastermind
+```bash
+npm install
 ```
 
-Run through:
-I decided that using functional principles was the best way to finish this simple game.
-Program consists of 4 functions.
+## Playing the game
+### Mastermind of the Third Kind
+![game screen](https://i.ibb.co/GHrH5Jj/Screenshot-2023-01-10-at-12-20-23-AM.png)
+1. Start the Node server:
+``` bash
+npm run start
+```
+2. Visit this page on your browserL
+``` 
+htttp://localhost:3000/
+```
+3. Sign-up and click "Game" on navbar. (WARNING: DB_URI is exposed, do not put sensitive data into application)
+4. Select difficulty. Easy: 4 digits | Medium : 5 digits | Hard: 6 digits
+5. Hover over spaces to reveal guess color. Click to select. When all guesses filled in, submit button appears. Guess input does not reset after each guess, you will have to start your guess over.
+6. Hovering over stars explains meaning in toolbox.
+7. You have 90 seconds and 10 guesses. When timer or guesses run out, you will be take to the LoseGame screen.
+8. If you win, you're taken to the WinScreen and your account is updated with the win.
+9. Top ten players are shown on leaderboard.
 
-*Functions:*
-- main: runs all the processes required for running game, think of it as the session
+
+### Mastermind CLI
+1. Start the game: 
+``` bash
+npm run mastermind
+```
+2. Game fetches randomNumber or generates code client-side
+3. Game will prompt you for a guess
+4. Guess Format: [ (0-7), (0-7), (0-7), (0-7)]
+5. Game validates guess
+6. You have 10 tries
+
+## Design
+#### Personal note: 
+This project was a wonderful experience as it allowed me to explore new boundaries in software development. I learned a good bit about humility and being able to step away from problems. This presented itself when building the game's visual interface. My goal was to build the interface from scratch using TailwindCSS. However, while my implementations were alright for someone who isn't a designer, I wasted too much time. I had to make the executive decision to step away from the problem and use a CSS library named DaisyUI. While hurting my ego, it gave me the opportunity to expand my knowledge-base, refocus on aspects of game that mattered, 
+
+
+My journey into designing the game began by breaking down the gameplay loop on paper:
+1. Get code
+2. Prompt guess from user
+3. Check validity of guess
+4. Return results
+5. Repeat 9 more times
+
+From there I created a CLI with the following functions:
+- main: runs the program 
 - fetchNumbers: uses Axios library to fetch random integers from random.API while parsing them into usable array
 - mapCode: creates a hashMap of code of our secretCode to keep track of indexes
 - masterMind: recursive function that increases tries and passes codeMap until either 10 tries have been made or game is won
-  - user input and verification is done through prompt library with regex
+- user input and verification is done through prompt library with regex
 
-### Bug list:
-- [x] duplicate numbers give incorrect hints.
-Example:
-secretCode = [3, 4, 3, 6]
-guess = [3, 3, 3, 3]
+Abstracting away all the complicated logic that comes with designing a game to a simple CLI allowed me to see that this challenge could easily be solved with a simple REST API. 
 
-Backend response = 4 correct int, 2 correct location
+#### Web sequence diagram:
+![web sequence diagram](https://i.ibb.co/mywXChR/Screenshot-2023-01-10-at-1-31-57-AM.png)
 
-Date logged: 12/28/22
-Date fixed: 12/28/22
+#### Monogoose model structude:
+``` tree
+USER: 
+    |_username: unique
+    |_passwordBash
+    |_id
+    |_gameId: []
 
-- [ ] guess buttons won't reset to default state after guess is sent off
+GAME:
+    |_win: bool
+    |_finished: bool
+    |_startTIme
+    |_endTime
+    |_gameTime: seconds
+    |_tries
+    |_guesses
+    |_results
+    |_secretCode
+    |_userId
+```
 
-Date logged: 1/6/23
+#### Features missing
+1. Continue game 
+    - I implemented a way to load up a game saved in DB since all the information is stored, however, I ran out of time and it broke my code. If I had an extra day, I'd definitely work on implementing it. 
+2. Multiplayer
+    - I'd love to create a multiplayer version of the app where either users can compete in a gauntlet style. Users would all have the same secretCode, there would be server rounds. Guesses, time, and wins would be considered as part of the scoring system.
+3. Account page
+    - An account page where a user can update their password, see their overall stats. 
+4. Restructure leaderboard
+    - I would like to change the leaderboard to be sorted by most consecutive wins as opposed to totalWins since that just rewards players who have more time as opposed to skill
+
+
+## Technologies
+#### Back end:
+- Node.js
+- Express
+- MongoDB / Mongoose
+- JSONWebToken
+
+#### Front end:
+- React
+- Axios
+- TailWindCSS with DaisyUI
+
+#### Testing:
+- Jest
+

@@ -39,7 +39,7 @@ guessRouter.post('/', async (req, res) => {
     throw error
   }
 
-  // Loads index of digits into hashMap
+  // Loads index of digits into map
   const codeRecurrence = new Map()
   secretCode.forEach((number, index) => {
     const indexes = codeRecurrence.get(number)

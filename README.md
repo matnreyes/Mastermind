@@ -79,7 +79,7 @@ My journey into designing the game began by breaking down the gameplay loop on p
 From there I created a CLI with the following functions:
 - main: runs the program 
 - fetchNumbers: uses Axios library to fetch random integers from random.API while parsing them into usable array
-- mapCode: creates a hashMap of code of our secretCode to keep track of indexes
+- mapCode: creates a map of code of our secretCode to keep track of indexes
 - masterMind: recursive function that increases tries and passes codeMap until either 10 tries have been made or game is won
 - user input and verification is done through prompt library with regex
 

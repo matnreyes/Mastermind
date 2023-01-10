@@ -18,21 +18,12 @@ const gameSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  startTime: {
-    type: Number,
-    default: (new Date()).getTime()
-  },
-  endTime: {
-    type: Number,
-    default: (new Date(Date.now() + 1000 * 90)).getTime()
-  },
+  startTime: Object,
+  endTime: Object,
   secretCode: [{
     type: String
   }],
-  gameTime: {
-    type: Number,
-    default: 0
-  },
+  gameTime: Object,
   guesses: {
     type: Array
   },

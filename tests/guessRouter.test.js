@@ -3,14 +3,36 @@ const app = require('../app')
 
 const api = supertest(app)
 
-describe('guess is checked', () => {
-  const secretCode = [1, 2, 3, 4]
+let game = 0
+let user = 0
+const secretCode = [1, 2, 3, 4]
 
+beforeAll(async () => {
+  const newPlayer = {
+    username: 'testUser',
+    password: 'passwordd'
+  }
+
+  const userResponse = await api
+    .post('/api/users')
+    .send(newPlayer)
+
+  user = userResponse.body
+
+  const gameResponse = await api
+    .post('/api/games')
+    .send({ difficulty: 4, secretCode, userId: user.id })
+    .expect('Content-Type', /application\/json/)
+
+  game = gameResponse.body
+})
+
+describe('guess is checked', () => {
   test('and fails if guess is larger than code', async () => {
     const guess = [1, 2, 3, 4, 5, 6]
     const guessResponse = await api
       .post('/api/guess')
-      .send({ secretCode, guess })
+      .send({ secretCode, guess, game })
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
@@ -23,7 +45,7 @@ describe('guess is checked', () => {
 
     const guessResponse = await api
       .post('/api/guess')
-      .send({ secretCode, guess })
+      .send({ secretCode, guess, game })
       .expect(200)
       .expect('Content-Type', /application\/json/)
 
@@ -38,7 +60,7 @@ describe('guess is checked', () => {
 
     const guessResponse = await api
       .post('/api/guess')
-      .send({ secretCode, guess })
+      .send({ secretCode, guess, game })
       .expect(200)
       .expect('Content-Type', /application\/json/)
 
@@ -52,7 +74,7 @@ describe('guess is checked', () => {
 
     const guessResponse = await api
       .post('/api/guess')
-      .send({ secretCode, guess })
+      .send({ secretCode, guess, game })
       .expect(200)
       .expect('Content-Type', /application\/json/)
 
@@ -66,7 +88,7 @@ describe('guess is checked', () => {
 
     const guessResponse = await api
       .post('/api/guess')
-      .send({ secretCode, guess })
+      .send({ secretCode, guess, game })
       .expect(200)
       .expect('Content-Type', /application\/json/)
 
@@ -80,7 +102,7 @@ describe('guess is checked', () => {
 
     const guessResponse = await api
       .post('/api/guess')
-      .send({ secretCode, guess })
+      .send({ secretCode, guess, game })
       .expect(400)
 
     expect(guessResponse.body.error).toContain('Guess must be within range of 0 to 7')

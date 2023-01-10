@@ -2,8 +2,8 @@ import axios from 'axios'
 
 const baseUrl = '/api/guess'
 
-const validateGuess = async (secretCode, guess, tries, endTime) => {
-  const response = await axios.post(baseUrl, { secretCode, guess, tries, endTime })
+const validateGuess = async (secretCode, guess, game) => {
+  const response = await axios.post(baseUrl, { secretCode, guess, game })
   return response.data
 }
 

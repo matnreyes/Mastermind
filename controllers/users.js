@@ -41,4 +41,17 @@ usersRouter.put('/:username', async (req, res) => {
   res.status(202).end()
 })
 
+usersRouter.get('/', async (req, res) => {
+  const users = await User
+    .find({})
+    .populate('games', {
+      secretCode: 0,
+      startTime: 0,
+      endTime: 0,
+      user: 0
+    })
+
+  res.json(users)
+})
+
 module.exports = usersRouter

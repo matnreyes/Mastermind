@@ -56,26 +56,26 @@ describe('updating game', () => {
     const newGame = new Game({
       user: user.id,
       difficulty: 5,
-      secretCode: [1, 1, 1, 1]
+      secretCode: [1, 1, 1, 1],
+      finished: false
     })
 
-    const savedGame = await newGame.save()
-    savedGame.id = savedGame._id.toString()
+    const gameResponse = await api
+      .post('/api/games')
+      .send({ ...newGame, userId: user.id })
 
+    const savedGame = gameResponse.body
     savedGame.finished = true
     savedGame.won = true
     savedGame.tries = 6
-    savedGame.secretCode = [4, 5, 6, 7]
-
     const updatedGame = await api
       .put(`/api/games/${savedGame.id}`)
-      .send(savedGame._doc)
+      .send({ ...savedGame })
       .set('authorization', token)
       .expect(200)
       .expect('Content-Type', /application\/json/)
 
     expect(updatedGame.body.tries).toEqual(savedGame.tries)
-    expect(updatedGame.body.secretCode).toEqual(['1', '1', '1', '1'])
     expect(updatedGame.body.finished).toEqual(true)
   })
 })

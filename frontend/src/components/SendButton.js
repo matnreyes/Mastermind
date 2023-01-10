@@ -4,8 +4,12 @@ import handleSounds from '../utils/sounds'
 
 const SendButton = ({ guess, code, guesses, setGuesses, setGuess, setResult, results, setSendButtonActive, setGameStatus, game, setGame, useAudio }) => {
   const handleGuess = async () => {
+    if (guesses.length >= 9) {
+      setGameStatus('lost')
+      return
+    }
+
     // Play sound for each note
-    console.log(useAudio)
     if (useAudio) {
       guess.forEach((note, index) => {
         handleSounds(note, index)
@@ -13,7 +17,7 @@ const SendButton = ({ guess, code, guesses, setGuesses, setGuess, setResult, res
     }
 
     // Check guess and update tries on game
-    const response = await guessService.validateGuess(code, guess, guesses.length, game.endTime) 
+    const response = await guessService.validateGuess(code, guess, game) 
     const updatedGame = await gameService.updateGame(game, {...game, tries: game.tries + 1, guesses: game.guesses.concat([guess]), results: game.results.concat(response)})
     setGame(updatedGame)
     if (response.location === code.length) {

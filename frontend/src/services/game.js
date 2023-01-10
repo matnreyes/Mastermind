@@ -18,6 +18,7 @@ const updateGame = async (game, update) => {
 
 const setWin = async (game) => {
   const wonGame = {...game, won: true, finished: true}
+  console.log(game.id)
   const winResponse = await axios.put(`${baseUrl}/${game.id}`, wonGame, { headers: {authorization: token}})
   return winResponse.data
 }

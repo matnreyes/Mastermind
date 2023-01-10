@@ -1,25 +1,24 @@
 const guessRouter = require('express').Router()
+const Game = require('../models/game')
 
 guessRouter.post('/', async (req, res) => {
-  const {
-    secretCode,
-    guess,
-    tries,
-    endTime
-  } = req.body
+  const { secretCode, guess } = req.body
+  const { tries, id } = req.body.game
 
   const results = {
     digit: 0,
     location: 0
   }
 
-  if (tries > 9) {
+  const { endTime } = await Game.findById(id)
+
+  if (tries >= 9) {
     const error = new Error('Out of guesses')
     error.name = 'GameOver'
     throw (error)
   }
 
-  const currentTime = (new Date(Date.now())).getTime()
+  const currentTime = new Date()
   if (endTime < currentTime) {
     const error = new Error('Out of time')
     error.name = 'OutOfTime'

@@ -1,10 +1,11 @@
 import { useState } from 'react'
-const TimeCountdown = ({ setGameStatus, endTime }) => {
-  const [second, setSecond] = useState(Math.floor((endTime - (new Date(Date.now()).getTime())) / 1000))
+
+const TimeCountdown = ({ setGameStatus, game }) => {
+  const [second, setSecond] = useState(90)
   setTimeout(() => {
     setSecond(second - 1)
     if (second <= 0) {
-      setGameStatus('lost')
+     setGameStatus('lost')
     }
   }, 1000)
 

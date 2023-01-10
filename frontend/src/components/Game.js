@@ -12,21 +12,22 @@ import TriesCountdown from './TriesCountdown'
 import TimeCountdown from './TimeCountdown'
 import HintButton from './HintButton'
 
-const Game = ({user, useAudio, game, setGame }) => {
+const Game = ({user, useAudio }) => {
+  const [game, setGame] = useState()
   const [difficulty, setDifficulty] = useState(game ? game.difficulty : 4)
   const [code, setCode] = useState(game ? game.secretCode : null)
   const [guess, setGuess] = useState([])
-  const [guesses, setGuesses] = useState(game ? game.guesses : [])
-  const [results, setResult] = useState(game ? game.results : [])
+  const [guesses, setGuesses] = useState(game ? [...game.guesses] : [])
+  const [results, setResult] = useState(game ? [...game.results] : [])
   const [sendButtonActive, setSendButtonActive] = useState(false)
   const [gameStatus, setGameStatus] = useState('active')
 
-  // Reset game
   useEffect(() => {
+    window.localStorage.removeItem('game')
     setGuess([])
     setGuesses([])
     setResult([])
-  }, [code])
+  }, [gameStatus])
 
   // Handle win
   useEffect(() => {
@@ -35,19 +36,18 @@ const Game = ({user, useAudio, game, setGame }) => {
       userService.updateWins(user.username, user.token)
     }
     if (gameStatus === 'lost') {
-      gameService.setLoss()
-      setGame(null)
-      window.localStorage.removeItem('game')
+      gameService.setLoss(game)
     }
-  }, [gameStatus, user])
+    window.localStorage.removeItem('game')
+  }, [gameStatus, user, game])
 
   
   const setGameDifficulty = async (event) => {
     const code = await codeService.fetchCode(event.target.value)
     const gameInfo = await gameService.newGame(code.length, code, user.userId)
     // Store game in localStorage
-    window.localStorage.setItem('game', JSON.stringify(gameInfo))
     setGame(gameInfo)
+    window.localStorage.setItem('game', JSON.stringify(gameInfo))
     setDifficulty(code.length)
     setCode(code)
   }
@@ -61,6 +61,12 @@ const Game = ({user, useAudio, game, setGame }) => {
     setGuess(guessArray)
   }
 
+  const restartGame = () => {
+    setGame(null)
+    setGameStatus('active')
+    setCode(null)
+  }
+
 
   const endGame = () => {
     if (gameStatus === 'active') {
@@ -68,8 +74,8 @@ const Game = ({user, useAudio, game, setGame }) => {
     }
 
     return gameStatus === 'won'
-    ? <WinScreen setGameStatus={setGameStatus} setCode={setCode} triesLeft={10 - results.length} />
-    : <LoseScreen setCode={setCode} setGameStatus={setGameStatus} />
+    ? <WinScreen restartGame={restartGame} triesLeft={10 - game.tries}/>
+    : <LoseScreen restartGame={restartGame}/>
   }
 
   const activeGame = () => (
@@ -83,8 +89,8 @@ const Game = ({user, useAudio, game, setGame }) => {
             <h3 className="text-5xl font-bold">Guess the musical code to save humanity</h3>
           </div>
           <div className="flex flex-row content-center gap-10">
-            <TimeCountdown setGameStatus={setGameStatus} endTime={game.endTime}/>
-            <TriesCountdown tries={guesses.length}/>
+            <TimeCountdown setGameStatus={setGameStatus} game={game}/>
+            <TriesCountdown tries={(10 - game.tries)}/>
             <HintButton secretCode={code}/>
           </div>
           <div className="md:flex gap-4">
@@ -94,7 +100,7 @@ const Game = ({user, useAudio, game, setGame }) => {
                 <SendButton guess={guess} code={code} guesses={guesses} setGuesses={setGuesses} setGuess={setGuess} results={results} setResult={setResult} setSendButtonActive={setSendButtonActive} setGameStatus={setGameStatus} game={game} setGame={setGame} useAudio={useAudio}/>
               }
             </div>
-            <GuessHistory guesses={guesses} results={results}/>
+            <GuessHistory guesses={game.guesses} results={game.results}/>
           </div>
         </div>}
     </>

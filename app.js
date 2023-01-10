@@ -11,6 +11,7 @@ const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const leaderboardRouter = require('./controllers/leaderboard')
 const gameRouter = require('./controllers/games')
+const resetRouter = require('./controllers/reset')
 
 const app = express()
 
@@ -33,6 +34,10 @@ if (process.env.NODE_ENV === 'production') {
 app.use(cors())
 app.use(express.json())
 app.use(middleware.requestLogger)
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use('/api/burnitdown', resetRouter)
+}
 
 app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)

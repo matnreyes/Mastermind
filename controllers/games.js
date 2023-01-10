@@ -18,7 +18,9 @@ gameRouter.post('/', async (req, res) => {
   const newGame = new Game({
     user: user.id,
     difficulty,
-    secretCode
+    secretCode,
+    startTime: new Date(),
+    endTime: new Date((new Date()).getTime() + 93000)
   })
 
   const savedGame = await newGame.save()
@@ -34,21 +36,22 @@ gameRouter.put('/:id', tokenExtractor, async (req, res) => {
     tries,
     won,
     finished,
-    startTime,
-    endTime,
     guesses,
-    results
+    results,
+    id
   } = req.body
 
+  const { endTime, startTime } = await Game.findById(id)
+
   // Prevent users from updating everything
-  const currentTime = (new Date(Date.now()).getTime())
+  const currentTime = new Date()
   const updatedGame = {
     tries,
     won,
     finished,
     guesses,
     results,
-    gameTime: (Math.floor(currentTime - startTime) / 1000)
+    gameTime: Math.floor((currentTime - startTime) / 1000)
   }
 
   const gameLost = !updatedGame.won && updatedGame.finished
@@ -62,6 +65,7 @@ gameRouter.put('/:id', tokenExtractor, async (req, res) => {
   }
 
   const game = await Game.findByIdAndUpdate(req.params.id, updatedGame, { new: true })
+
   res.status(200).json(game)
 })
 

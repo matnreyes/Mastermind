@@ -1,6 +1,10 @@
 # Mastermind of the Third Kind
+### [Deployment Link](htttps://matnreyes-mastermind.fly.dev)
 
 ### Aliens from the fourth dimension have landed on Earth. With your musical genius, and our state of the art deciphering software, help us decipher their language to save our planet from total destruction.
+Inspired by:
+- [This scene from Close Encounters of the Third Kind](https://www.youtube.com/watch?v=wZj7gUIO-2k&t=57s)
+- My love for space and music
 
 ## Features
 - Leaderboard

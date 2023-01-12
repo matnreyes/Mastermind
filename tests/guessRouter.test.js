@@ -108,3 +108,8 @@ describe('guess is checked', () => {
     expect(guessResponse.body.error).toContain('Guess must be within range of 0 to 7')
   })
 })
+
+afterAll(async () => {
+  await api
+    .post('/api/burnitdown')
+})

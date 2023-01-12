@@ -15,6 +15,7 @@ const promptSchema = {
   }
 }
 
+// 1, 2, 3, 4
 // Maps index of secretCode
 const mapCode = async (code) => {
   const indexMap = new Map()

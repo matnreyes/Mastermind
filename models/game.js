@@ -24,9 +24,7 @@ const gameSchema = new mongoose.Schema({
     type: String
   }],
   gameTime: Object,
-  guesses: {
-    type: Array
-  },
+  guesses: Array,
   results: {
     type: Array
   },
